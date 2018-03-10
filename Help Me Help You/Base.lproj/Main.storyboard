@@ -59,12 +59,12 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GCt-Py-M39">
                                 <rect key="frame" x="8" y="144" width="359" height="30"/>
-                                <state key="normal" title="Login or Signup"/>
+                                <state key="normal" title="Login / Signup"/>
                                 <connections>
                                     <action selector="loginBtn:" destination="aWG-86-80H" eventType="touchUpInside" id="Kq7-Ip-H33"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEV-Pl-44W">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEV-Pl-44W">
                                 <rect key="frame" x="8" y="206" width="359" height="121"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="121" id="lqv-9o-0x0"/>
@@ -93,6 +93,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="9Mf-hE-WiT" id="afe-Fn-z65"/>
+                        <outlet property="loginSignupBtn" destination="GCt-Py-M39" id="NvZ-LM-OIT"/>
                         <outlet property="passwordTextField" destination="6bn-47-DdD" id="17A-0h-XNV"/>
                         <outlet property="responseLable" destination="GEV-Pl-44W" id="CVN-65-RvG"/>
                     </connections>

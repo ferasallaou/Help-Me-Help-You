@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var loginSignupBtn: UIButton!
     @IBOutlet weak var responseLable: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,18 +28,21 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginBtn(_ sender: Any) {
         responseLable.text = ""
-     checkLoginField()
+        loginSignupBtn.isEnabled = false
+        checkLoginField()
     }
     
     func checkLoginField() {
-        //print(emailTextField.text!)
         if emailTextField.text?.isEmpty ?? true {
             responseLable.text = "Please Fill in Your login Credentials"
+            loginSignupBtn.isEnabled = true
             return
         }
         
         if passwordTextField.text?.isEmpty ?? true{
             responseLable.text = "Please Fill in Your login Credentials"
+            loginSignupBtn.isEnabled = true
+            return
         }
         
         self.loginOrSignUp(email: emailTextField.text!, password: passwordTextField.text!) {
@@ -46,6 +50,7 @@ class LoginViewController: UIViewController {
             
             guard error == nil else {
                 self.responseLable.text = "\(error!)"
+                self.loginSignupBtn.isEnabled = true
                 return
             }
             

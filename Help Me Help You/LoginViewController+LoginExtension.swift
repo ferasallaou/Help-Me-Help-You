@@ -21,8 +21,8 @@ extension LoginViewController {
                 if foramtedError.code != 17011 {
                     loginSignUpCompletionHandler(foramtedError.localizedDescription, nil)
                 }else {
-                    // Proceeding to SignUp.....
                     
+                    // Proceeding to SignUp.....
                     Auth.auth().createUser(withEmail: email, password: password){
                         (user, error) in
                         
