@@ -11,10 +11,12 @@
 		E022208F204FD0AE006CC06A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022208E204FD0AE006CC06A /* Constants.swift */; };
 		E0222091204FD22C006CC06A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0222090204FD22B006CC06A /* GoogleService-Info.plist */; };
 		E03E2735204FC89D00FCD334 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03E2734204FC89D00FCD334 /* AppDelegate.swift */; };
-		E03E2737204FC89D00FCD334 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03E2736204FC89D00FCD334 /* ViewController.swift */; };
+		E03E2737204FC89D00FCD334 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03E2736204FC89D00FCD334 /* MainViewController.swift */; };
 		E03E273A204FC89D00FCD334 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03E2738204FC89D00FCD334 /* Main.storyboard */; };
 		E03E273C204FC89D00FCD334 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E03E273B204FC89D00FCD334 /* Assets.xcassets */; };
 		E03E273F204FC89D00FCD334 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03E273D204FC89D00FCD334 /* LaunchScreen.storyboard */; };
+		E08A358420536D2F00B47414 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A358320536D2F00B47414 /* LoginViewController.swift */; };
+		E08A35862053709100B47414 /* LoginViewController+LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,11 +27,13 @@
 		E0222090204FD22B006CC06A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E03E2731204FC89D00FCD334 /* Help Me Help You.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Help Me Help You.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03E2734204FC89D00FCD334 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E03E2736204FC89D00FCD334 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E03E2736204FC89D00FCD334 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E03E2739204FC89D00FCD334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E03E273B204FC89D00FCD334 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E03E273E204FC89D00FCD334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E03E2740204FC89D00FCD334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E08A358320536D2F00B47414 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+LoginExtension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,12 +88,14 @@
 			isa = PBXGroup;
 			children = (
 				E03E2734204FC89D00FCD334 /* AppDelegate.swift */,
-				E03E2736204FC89D00FCD334 /* ViewController.swift */,
+				E03E2736204FC89D00FCD334 /* MainViewController.swift */,
 				E03E2738204FC89D00FCD334 /* Main.storyboard */,
 				E03E273B204FC89D00FCD334 /* Assets.xcassets */,
 				E03E273D204FC89D00FCD334 /* LaunchScreen.storyboard */,
 				E03E2740204FC89D00FCD334 /* Info.plist */,
 				E022208E204FD0AE006CC06A /* Constants.swift */,
+				E08A358320536D2F00B47414 /* LoginViewController.swift */,
+				E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */,
 			);
 			path = "Help Me Help You";
 			sourceTree = "<group>";
@@ -190,9 +196,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Help Me Help You/Pods-Help Me Help You-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -207,12 +216,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Help Me Help You/Pods-Help Me Help You-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -228,8 +239,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E03E2737204FC89D00FCD334 /* ViewController.swift in Sources */,
+				E08A358420536D2F00B47414 /* LoginViewController.swift in Sources */,
+				E03E2737204FC89D00FCD334 /* MainViewController.swift in Sources */,
 				E03E2735204FC89D00FCD334 /* AppDelegate.swift in Sources */,
+				E08A35862053709100B47414 /* LoginViewController+LoginExtension.swift in Sources */,
 				E022208F204FD0AE006CC06A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
