@@ -27,11 +27,10 @@ extension LoginViewController {
                         (user, error) in
                         
                         guard error == nil else {
-                            print("We got an error \(error!.localizedDescription)")
+                            loginSignUpCompletionHandler(error!.localizedDescription, nil)
                             return
                         }
                         
-                        //print(user)
                     }
                 }
             }else{

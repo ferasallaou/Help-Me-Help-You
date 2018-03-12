@@ -14,6 +14,7 @@ class MainViewController: UIViewController {
     
     var userHandler: AuthStateDidChangeListenerHandle?
     
+
     @IBAction func loginBtn(_ sender: Any) {
         if Auth.auth().currentUser != nil {
             do {
@@ -27,7 +28,7 @@ class MainViewController: UIViewController {
             
         }
     }
-    @IBOutlet weak var login: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -54,7 +55,7 @@ class MainViewController: UIViewController {
                 return
             }
             
-            print(user?.email)
+            print(user?.email ?? "NO User EMail")
 
         }
     }

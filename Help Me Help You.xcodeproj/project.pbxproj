@@ -10,6 +10,8 @@
 		38844035351F1781989FB7D4 /* Pods_Help_Me_Help_You.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5287338EA69F50CA59EC44A /* Pods_Help_Me_Help_You.framework */; };
 		E022208F204FD0AE006CC06A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022208E204FD0AE006CC06A /* Constants.swift */; };
 		E0222091204FD22C006CC06A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0222090204FD22B006CC06A /* GoogleService-Info.plist */; };
+		E035A1712056415200C1F68C /* AskForHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035A1702056415200C1F68C /* AskForHelpViewController.swift */; };
+		E035A1732056429800C1F68C /* LocationMangerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035A1722056429800C1F68C /* LocationMangerController.swift */; };
 		E03E2735204FC89D00FCD334 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03E2734204FC89D00FCD334 /* AppDelegate.swift */; };
 		E03E2737204FC89D00FCD334 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03E2736204FC89D00FCD334 /* MainViewController.swift */; };
 		E03E273A204FC89D00FCD334 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03E2738204FC89D00FCD334 /* Main.storyboard */; };
@@ -17,6 +19,9 @@
 		E03E273F204FC89D00FCD334 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03E273D204FC89D00FCD334 /* LaunchScreen.storyboard */; };
 		E08A358420536D2F00B47414 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A358320536D2F00B47414 /* LoginViewController.swift */; };
 		E08A35862053709100B47414 /* LoginViewController+LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */; };
+		E0AFDE72205667180018C2DC /* ShowQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AFDE71205667180018C2DC /* ShowQuestionViewController.swift */; };
+		E0F00AE12056482F00317C01 /* AskForHelpVC+LocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */; };
+		E0F00AE3205654F600317C01 /* AskForHelpVC+TextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +30,8 @@
 		B5287338EA69F50CA59EC44A /* Pods_Help_Me_Help_You.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Help_Me_Help_You.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E022208E204FD0AE006CC06A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E0222090204FD22B006CC06A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E035A1702056415200C1F68C /* AskForHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForHelpViewController.swift; sourceTree = "<group>"; };
+		E035A1722056429800C1F68C /* LocationMangerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMangerController.swift; sourceTree = "<group>"; };
 		E03E2731204FC89D00FCD334 /* Help Me Help You.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Help Me Help You.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03E2734204FC89D00FCD334 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E03E2736204FC89D00FCD334 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -34,6 +41,9 @@
 		E03E2740204FC89D00FCD334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E08A358320536D2F00B47414 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+LoginExtension.swift"; sourceTree = "<group>"; };
+		E0AFDE71205667180018C2DC /* ShowQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQuestionViewController.swift; sourceTree = "<group>"; };
+		E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForHelpVC+LocationExtension.swift"; sourceTree = "<group>"; };
+		E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForHelpVC+TextViewExtension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +106,11 @@
 				E022208E204FD0AE006CC06A /* Constants.swift */,
 				E08A358320536D2F00B47414 /* LoginViewController.swift */,
 				E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */,
+				E035A1702056415200C1F68C /* AskForHelpViewController.swift */,
+				E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */,
+				E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */,
+				E035A1722056429800C1F68C /* LocationMangerController.swift */,
+				E0AFDE71205667180018C2DC /* ShowQuestionViewController.swift */,
 			);
 			path = "Help Me Help You";
 			sourceTree = "<group>";
@@ -216,15 +231,29 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Help Me Help You/Pods-Help Me Help You-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,8 +268,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0F00AE12056482F00317C01 /* AskForHelpVC+LocationExtension.swift in Sources */,
 				E08A358420536D2F00B47414 /* LoginViewController.swift in Sources */,
+				E035A1712056415200C1F68C /* AskForHelpViewController.swift in Sources */,
 				E03E2737204FC89D00FCD334 /* MainViewController.swift in Sources */,
+				E0AFDE72205667180018C2DC /* ShowQuestionViewController.swift in Sources */,
+				E035A1732056429800C1F68C /* LocationMangerController.swift in Sources */,
+				E0F00AE3205654F600317C01 /* AskForHelpVC+TextViewExtension.swift in Sources */,
 				E03E2735204FC89D00FCD334 /* AppDelegate.swift in Sources */,
 				E08A35862053709100B47414 /* LoginViewController+LoginExtension.swift in Sources */,
 				E022208F204FD0AE006CC06A /* Constants.swift in Sources */,

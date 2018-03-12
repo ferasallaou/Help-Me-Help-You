@@ -4,6 +4,8 @@ target 'Help Me Help You' do
   use_frameworks!
 pod 'Alamofire', '~> 4.7'	
 pod 'Firebase/Auth'
+pod 'Firebase/Core'
+pod 'Firebase/Firestore'
 
 
   # Pods for Help Me Help You
