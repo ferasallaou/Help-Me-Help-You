@@ -52,6 +52,8 @@ class AskForHelpViewController: UIViewController {
 
 
     @IBAction func sendUrQuestion(_ sender: Any) {
+
+        
         self.sendQuestionBtn.isEnabled = false
         if let question = questionTextView.text, question != "Write Your Question" || question == "" {
             let dataToSave = [
@@ -61,16 +63,42 @@ class AskForHelpViewController: UIViewController {
                 "cityCoordinates": GeoPoint(latitude: (userLocation?.latitude)!, longitude: (userLocation?.longitude)!),
                 "postedAt": Date()
                 ] as [String : Any]
-        
+
             ref = database!.collection("Questions").addDocument(data: dataToSave) {
                 err in
-                
+
                 guard err == nil else {
                     self.showAlert(title: "Error", message: "Couldn't post your question, Please try again later.")
                     self.sendQuestionBtn.isEnabled = true
                     return
                 }
+
+
+                let userID = Auth.auth().currentUser?.uid
+                let userRef = self.database!.collection("Users").document("\(userID!)")
                 
+                self.database!.runTransaction({ (transaction, error) -> Any? in
+                    do {
+                        let userTransactoin = try transaction.getDocument(userRef).data()
+                        guard var userInfo = userTransactoin else {return nil}
+                        
+                        var newQuestion = userInfo["questions"] as! Int
+                        newQuestion += 1
+                        userInfo["questions"] = newQuestion
+                        
+                        transaction.setData(userInfo, forDocument: userRef)
+                    }catch{
+                        print("Error in getting Data")
+                    }
+                    
+                    
+                    return nil
+                }) { (completionObj, complationErrir) in
+                    //
+                }
+
+
+
                 let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "showQuestion") as! ShowQuestionViewController
                 nextVC.questionID = self.ref?.documentID
                 self.present(nextVC, animated: true, completion: nil)
@@ -79,14 +107,5 @@ class AskForHelpViewController: UIViewController {
             showAlert(title: "Error", message: "Enter Your question ")
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

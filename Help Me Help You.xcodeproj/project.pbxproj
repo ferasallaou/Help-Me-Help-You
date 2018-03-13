@@ -20,6 +20,7 @@
 		E08A358420536D2F00B47414 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A358320536D2F00B47414 /* LoginViewController.swift */; };
 		E08A35862053709100B47414 /* LoginViewController+LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */; };
 		E0AFDE72205667180018C2DC /* ShowQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AFDE71205667180018C2DC /* ShowQuestionViewController.swift */; };
+		E0C9BCF72057C31100B3869F /* GetUserNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C9BCF62057C31100B3869F /* GetUserNameViewController.swift */; };
 		E0F00AE12056482F00317C01 /* AskForHelpVC+LocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */; };
 		E0F00AE3205654F600317C01 /* AskForHelpVC+TextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		E08A358320536D2F00B47414 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+LoginExtension.swift"; sourceTree = "<group>"; };
 		E0AFDE71205667180018C2DC /* ShowQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQuestionViewController.swift; sourceTree = "<group>"; };
+		E0C9BCF62057C31100B3869F /* GetUserNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserNameViewController.swift; sourceTree = "<group>"; };
 		E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForHelpVC+LocationExtension.swift"; sourceTree = "<group>"; };
 		E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForHelpVC+TextViewExtension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +113,7 @@
 				E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */,
 				E035A1722056429800C1F68C /* LocationMangerController.swift */,
 				E0AFDE71205667180018C2DC /* ShowQuestionViewController.swift */,
+				E0C9BCF62057C31100B3869F /* GetUserNameViewController.swift */,
 			);
 			path = "Help Me Help You";
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				E0AFDE72205667180018C2DC /* ShowQuestionViewController.swift in Sources */,
 				E035A1732056429800C1F68C /* LocationMangerController.swift in Sources */,
 				E0F00AE3205654F600317C01 /* AskForHelpVC+TextViewExtension.swift in Sources */,
+				E0C9BCF72057C31100B3869F /* GetUserNameViewController.swift in Sources */,
 				E03E2735204FC89D00FCD334 /* AppDelegate.swift in Sources */,
 				E08A35862053709100B47414 /* LoginViewController+LoginExtension.swift in Sources */,
 				E022208F204FD0AE006CC06A /* Constants.swift in Sources */,

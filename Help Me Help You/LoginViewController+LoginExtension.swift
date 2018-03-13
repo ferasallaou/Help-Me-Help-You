@@ -31,6 +31,9 @@ extension LoginViewController {
                             return
                         }
                         
+                        let userNameVC = self.storyboard?.instantiateViewController(withIdentifier: "userNameVC")
+                        self.present(userNameVC!, animated: true, completion: nil)
+                        return
                     }
                 }
             }else{
