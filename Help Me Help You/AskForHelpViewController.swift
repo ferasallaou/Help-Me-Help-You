@@ -28,14 +28,23 @@ class AskForHelpViewController: UIViewController {
         questionTextView.layer.borderColor = UIColor.gray.cgColor
         questionTextView.layer.borderWidth = 1.0
         database = Firestore.firestore()
+        getUserLocation() {
+            error in
+            
+            guard error == nil else {
+                self.showAlert(title: "Location Error", message: "Couldn't get Location")
+                return
+            }
+
+            
+        }
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        getUserLocation()
-        LocationServices().getAdress(userLocation: locationManager.location!) {
+        LocationServices().getAdress(userLocation: self.locationManager.location!) {
             (address, error ) in
             
             guard error == nil else {
@@ -44,7 +53,6 @@ class AskForHelpViewController: UIViewController {
             }
             
             if let fullAddress = address, let cityName = fullAddress["City"]{
-                print(fullAddress)
                 self.cityAsString = cityName as? String
             }
         }
@@ -73,29 +81,31 @@ class AskForHelpViewController: UIViewController {
                     return
                 }
 
-
-                let userID = Auth.auth().currentUser?.uid
-                let userRef = self.database!.collection("Users").document("\(userID!)")
                 
-                self.database!.runTransaction({ (transaction, error) -> Any? in
-                    do {
-                        let userTransactoin = try transaction.getDocument(userRef).data()
-                        guard var userInfo = userTransactoin else {return nil}
-                        
-                        var newQuestion = userInfo["questions"] as! Int
-                        newQuestion += 1
-                        userInfo["questions"] = newQuestion
-                        
-                        transaction.setData(userInfo, forDocument: userRef)
-                    }catch{
-                        print("Error in getting Data")
-                    }
-                    
-                    
-                    return nil
-                }) { (completionObj, complationErrir) in
-                    //
-                }
+                let userID = Auth.auth().currentUser?.uid
+                FireBaseClient().incrementBy(collection: "Users", document: "\(userID)", fieldToInc: "questions", database: self.database!)
+                
+//                let userRef = self.database!.collection("Users").document("\(userID!)")
+//
+//                self.database!.runTransaction({ (transaction, error) -> Any? in
+//                    do {
+//                        let userTransactoin = try transaction.getDocument(userRef).data()
+//                        guard var userInfo = userTransactoin else {return nil}
+//
+//                        var newQuestion = userInfo["questions"] as! Int
+//                        newQuestion += 1
+//                        userInfo["questions"] = newQuestion
+//
+//                        transaction.setData(userInfo, forDocument: userRef)
+//                    }catch{
+//                        print("Error in getting Data")
+//                    }
+//
+//
+//                    return nil
+//                }) { (completionObj, complationErrir) in
+//                    //
+//                }
 
 
 

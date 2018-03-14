@@ -12,6 +12,7 @@
 		E0222091204FD22C006CC06A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0222090204FD22B006CC06A /* GoogleService-Info.plist */; };
 		E035A1712056415200C1F68C /* AskForHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035A1702056415200C1F68C /* AskForHelpViewController.swift */; };
 		E035A1732056429800C1F68C /* LocationMangerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035A1722056429800C1F68C /* LocationMangerController.swift */; };
+		E03A42032057E116001B9C47 /* FireBaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03A42022057E116001B9C47 /* FireBaseClient.swift */; };
 		E03E2735204FC89D00FCD334 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03E2734204FC89D00FCD334 /* AppDelegate.swift */; };
 		E03E2737204FC89D00FCD334 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03E2736204FC89D00FCD334 /* MainViewController.swift */; };
 		E03E273A204FC89D00FCD334 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03E2738204FC89D00FCD334 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		E0222090204FD22B006CC06A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E035A1702056415200C1F68C /* AskForHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForHelpViewController.swift; sourceTree = "<group>"; };
 		E035A1722056429800C1F68C /* LocationMangerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMangerController.swift; sourceTree = "<group>"; };
+		E03A42022057E116001B9C47 /* FireBaseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseClient.swift; sourceTree = "<group>"; };
 		E03E2731204FC89D00FCD334 /* Help Me Help You.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Help Me Help You.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03E2734204FC89D00FCD334 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E03E2736204FC89D00FCD334 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				E035A1722056429800C1F68C /* LocationMangerController.swift */,
 				E0AFDE71205667180018C2DC /* ShowQuestionViewController.swift */,
 				E0C9BCF62057C31100B3869F /* GetUserNameViewController.swift */,
+				E03A42022057E116001B9C47 /* FireBaseClient.swift */,
 			);
 			path = "Help Me Help You";
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				E0F00AE12056482F00317C01 /* AskForHelpVC+LocationExtension.swift in Sources */,
 				E08A358420536D2F00B47414 /* LoginViewController.swift in Sources */,
 				E035A1712056415200C1F68C /* AskForHelpViewController.swift in Sources */,
+				E03A42032057E116001B9C47 /* FireBaseClient.swift in Sources */,
 				E03E2737204FC89D00FCD334 /* MainViewController.swift in Sources */,
 				E0AFDE72205667180018C2DC /* ShowQuestionViewController.swift in Sources */,
 				E035A1732056429800C1F68C /* LocationMangerController.swift in Sources */,

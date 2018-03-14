@@ -12,18 +12,21 @@ import MapKit
 extension AskForHelpViewController: CLLocationManagerDelegate{
     
     
-    func getUserLocation() {
+    func getUserLocation(completionHandler: @escaping (String?)->Void) {
             locationManager.requestWhenInUseAuthorization()
             let isLocationAuth = CLLocationManager.authorizationStatus()
             if isLocationAuth != .authorizedAlways && isLocationAuth != .authorizedWhenInUse {
                 showAlert(title: "Location Service", message: "This app needs to use Location Service, Please grant the permissions.")
+                completionHandler("This app needs to use Location Service, Please grant the permissions.")
             }else if !CLLocationManager.locationServicesEnabled(){
                 showAlert(title: "Location Service", message: "Location Service is Disabled.")
+                completionHandler("Location Service is Disabled.")
             }else{
                 locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
                 locationManager.distanceFilter = 100.0  // In meters.
                 locationManager.delegate = self
                 locationManager.startUpdatingLocation()
+                completionHandler(nil)
             }
         
         
