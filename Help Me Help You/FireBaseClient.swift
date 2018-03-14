@@ -18,12 +18,14 @@ class FireBaseClient {
     {
      
         let docRef = database.collection("\(collection)").document("\(document!)")
+        
         database.runTransaction({ (transaction, error) -> Any? in
             do {
                 let refTransactoin = try transaction.getDocument(docRef).data()
                 guard var refInfo = refTransactoin else {return nil}
                 
                 var objectToIncrement = refInfo["\(fieldToInc)"] as! Int
+                
                 objectToIncrement += 1
                 refInfo["\(fieldToInc)"] = objectToIncrement
                 

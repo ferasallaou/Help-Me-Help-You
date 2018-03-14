@@ -83,30 +83,8 @@ class AskForHelpViewController: UIViewController {
 
                 
                 let userID = Auth.auth().currentUser?.uid
-                FireBaseClient().incrementBy(collection: "Users", document: "\(userID)", fieldToInc: "questions", database: self.database!)
+                FireBaseClient().incrementBy(collection: "Users", document: "\(userID!)", fieldToInc: "questions", database: self.database!)
                 
-//                let userRef = self.database!.collection("Users").document("\(userID!)")
-//
-//                self.database!.runTransaction({ (transaction, error) -> Any? in
-//                    do {
-//                        let userTransactoin = try transaction.getDocument(userRef).data()
-//                        guard var userInfo = userTransactoin else {return nil}
-//
-//                        var newQuestion = userInfo["questions"] as! Int
-//                        newQuestion += 1
-//                        userInfo["questions"] = newQuestion
-//
-//                        transaction.setData(userInfo, forDocument: userRef)
-//                    }catch{
-//                        print("Error in getting Data")
-//                    }
-//
-//
-//                    return nil
-//                }) { (completionObj, complationErrir) in
-//                    //
-//                }
-
 
 
                 let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "showQuestion") as! ShowQuestionViewController
