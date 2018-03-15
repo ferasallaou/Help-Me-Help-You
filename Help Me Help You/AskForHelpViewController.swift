@@ -16,11 +16,12 @@ class AskForHelpViewController: UIViewController {
     
     @IBOutlet weak var sendQuestionBtn: UIButton!
     @IBOutlet weak var questionTextView: UITextView!
-    let locationManager = CLLocationManager()
-    var userLocation: CLLocationCoordinate2D? = nil
+    
+    let customLocationManager = LocationManager()
     var database: Firestore? = nil
     var ref: DocumentReference? = nil
-    var cityAsString: String? =  nil
+    var cityName: String!
+    var userLocation : CLLocation!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,47 +29,45 @@ class AskForHelpViewController: UIViewController {
         questionTextView.layer.borderColor = UIColor.gray.cgColor
         questionTextView.layer.borderWidth = 1.0
         database = Firestore.firestore()
-        getUserLocation() {
-            error in
-            
-            guard error == nil else {
-                self.showAlert(title: "Location Error", message: "Couldn't get Location")
-                return
-            }
-
-            
-        }
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        LocationServices().getAdress(userLocation: self.locationManager.location!) {
-            (address, error ) in
+        super.viewWillAppear(animated)
+        self.sendQuestionBtn.isEnabled = false
+        self.sendQuestionBtn.titleLabel?.text = "Getting City Name...."
+        customLocationManager.getAdress() {
+            (address, error) in
             
             guard error == nil else {
-                print("Couldn't get your address")
+                print("An Error getting Cicty")
                 return
             }
             
-            if let fullAddress = address, let cityName = fullAddress["City"]{
-                self.cityAsString = cityName as? String
+            self.sendQuestionBtn.isEnabled = true
+            self.sendQuestionBtn.titleLabel?.text = "Send your question"
+            
+            if let stringCity = address!["City"] {
+                self.cityName = stringCity as! String
             }
+            
+            self.userLocation = self.customLocationManager.mUserLocation
+            
         }
+       
     }
 
 
     @IBAction func sendUrQuestion(_ sender: Any) {
-
-        
         self.sendQuestionBtn.isEnabled = false
         if let question = questionTextView.text, question != "Write Your Question" || question == "" {
             let dataToSave = [
                 "question": question,
                 "userid": Auth.auth().currentUser!.uid,
-                "cityName": cityAsString!,
-                "cityCoordinates": GeoPoint(latitude: (userLocation?.latitude)!, longitude: (userLocation?.longitude)!),
+                "cityName": cityName,
+                "cityCoordinates": GeoPoint(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude),
                 "postedAt": Date()
                 ] as [String : Any]
 
@@ -93,6 +92,7 @@ class AskForHelpViewController: UIViewController {
             }
         }else{
             showAlert(title: "Error", message: "Enter Your question ")
+            self.sendQuestionBtn.isEnabled = true
         }
     }
 

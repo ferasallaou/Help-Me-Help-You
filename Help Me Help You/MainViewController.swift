@@ -9,12 +9,14 @@
 import UIKit
 import Alamofire
 import FirebaseAuth
+import CoreLocation
 
 class MainViewController: UIViewController {
     
     var userHandler: AuthStateDidChangeListenerHandle?
+    let manager = CLLocationManager()
+    let customLocationManager = LocationManager()
     
-
     @IBAction func loginBtn(_ sender: Any) {
         if Auth.auth().currentUser != nil {
             do {
@@ -22,25 +24,24 @@ class MainViewController: UIViewController {
                 let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC")
                 self.present(loginVC!, animated: true, completion: nil)
             }catch let error as NSError{
-                print("Logout errro \(error.localizedDescription)")
-                
+                print("Logout error \(error.localizedDescription)")
             }
-            
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        customLocationManager.getUserLocation()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if let userHandler = userHandler {
         Auth.auth().removeStateDidChangeListener(userHandler)
         }
-        
     }
 
 
@@ -59,6 +60,10 @@ class MainViewController: UIViewController {
 
         }
     }
+
+    
+
+    
 
 }
 

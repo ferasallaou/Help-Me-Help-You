@@ -9,40 +9,9 @@
 import Foundation
 import MapKit
 
-extension AskForHelpViewController: CLLocationManagerDelegate{
+extension AskForHelpViewController{
     
-    
-    func getUserLocation(completionHandler: @escaping (String?)->Void) {
-            locationManager.requestWhenInUseAuthorization()
-            let isLocationAuth = CLLocationManager.authorizationStatus()
-            if isLocationAuth != .authorizedAlways && isLocationAuth != .authorizedWhenInUse {
-                showAlert(title: "Location Service", message: "This app needs to use Location Service, Please grant the permissions.")
-                completionHandler("This app needs to use Location Service, Please grant the permissions.")
-            }else if !CLLocationManager.locationServicesEnabled(){
-                showAlert(title: "Location Service", message: "Location Service is Disabled.")
-                completionHandler("Location Service is Disabled.")
-            }else{
-                locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-                locationManager.distanceFilter = 100.0  // In meters.
-                locationManager.delegate = self
-                locationManager.startUpdatingLocation()
-                completionHandler(nil)
-            }
-        
-        
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let tryUserLocation = locations.last {
-            
-            userLocation = tryUserLocation.coordinate
-        }else{
-            // set it to Where Magic Happend :))
-            userLocation = CLLocationCoordinate2D(latitude: 37.332, longitude: -122.01)
-        }
 
-    }
-    
     
     func showAlert(title: String,message: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
