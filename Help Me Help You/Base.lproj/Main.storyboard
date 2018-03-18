@@ -84,7 +84,7 @@
                     <connections>
                         <outlet property="questionTextView" destination="eBY-zX-kbM" id="Lv6-jt-Oaa"/>
                         <outlet property="sendQuestionBtn" destination="RFs-h8-qE0" id="tIT-da-3Dz"/>
-                        <segue destination="o0I-55-vqx" kind="custom" identifier="questionToList" id="356-Ck-msj"/>
+                        <segue destination="o0I-55-vqx" kind="show" identifier="questionToList" id="356-Ck-msj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hR-2g-mTI" userLabel="First Responder" sceneMemberID="firstResponder"/>

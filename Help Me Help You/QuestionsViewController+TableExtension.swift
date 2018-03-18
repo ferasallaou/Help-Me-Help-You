@@ -19,7 +19,7 @@ extension QuestionsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell")
         let item = question[indexPath.row]
         
-        if let qID = questionID as? String{ 
+        if let qID = questionID as? String, item.docID == qID{
             cell?.contentView.backgroundColor = UIColor.gray
         }
         

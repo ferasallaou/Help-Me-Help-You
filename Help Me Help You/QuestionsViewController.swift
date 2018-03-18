@@ -39,6 +39,7 @@ class QuestionsViewController: UIViewController{
     override func viewDidLoad() {
         question = []
         super.viewDidLoad()
+        
         database = Firestore.firestore()
         customLocation.getAdress() {
             (address, error) in
@@ -65,7 +66,7 @@ class QuestionsViewController: UIViewController{
 
 
     override func viewWillAppear(_ animated: Bool) {
-
+print("GO this \(questionID)")
         super.viewWillAppear(animated)
     }
     

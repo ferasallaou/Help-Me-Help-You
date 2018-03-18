@@ -22,7 +22,7 @@ class AskForHelpViewController: UIViewController {
     var ref: DocumentReference? = nil
     var cityName: String!
     var userLocation : CLLocation!
-    
+    var questionID: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         questionTextView.delegate = self
@@ -86,12 +86,20 @@ class AskForHelpViewController: UIViewController {
                 FireBaseClient().incrementBy(collection: "Users", document: "\(userID!)", fieldToInc: "questions", database: self.database!)
                 let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "showQuestion") as! ShowQuestionViewController
                 nextVC.questionID = self.ref?.documentID
-                self.tabBarController?.selectedIndex = 2
+                self.questionID = self.ref?.documentID
+                self.performSegue(withIdentifier: "questionToList", sender: self)
+                //self.tabBarController?.selectedIndex = 2
             }
         }else{
             showAlert(title: "Error", message: "Enter Your question ")
             self.sendQuestionBtn.isEnabled = true
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let mainNC = segue.destination
+        let childs = mainNC.childViewControllers[0] as! QuestionsViewController
+        childs.questionID = self.questionID
     }
 
 }
