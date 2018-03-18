@@ -49,7 +49,7 @@ class AskForHelpViewController: UIViewController {
             self.sendQuestionBtn.isEnabled = true
             self.sendQuestionBtn.titleLabel?.text = "Send your question"
             
-            if let stringCity = address!["City"] {
+            if let stringCity = address{
                 self.cityName = stringCity as! String
             }
             
@@ -63,14 +63,17 @@ class AskForHelpViewController: UIViewController {
     @IBAction func sendUrQuestion(_ sender: Any) {
         self.sendQuestionBtn.isEnabled = false
         if let question = questionTextView.text, question != "Write Your Question" || question == "" {
+            let userID = Auth.auth().currentUser?.uid
+            let userReference = self.database!.collection("Users").document(userID!)
             let dataToSave = [
                 "question": question,
                 "userid": Auth.auth().currentUser!.uid,
                 "cityName": cityName,
                 "cityCoordinates": GeoPoint(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude),
-                "postedAt": Date()
+                "postedAt": Date(),
+                "userReference": userReference
                 ] as [String : Any]
-
+            
             ref = database!.collection("Questions").addDocument(data: dataToSave) {
                 err in
 
@@ -80,15 +83,10 @@ class AskForHelpViewController: UIViewController {
                     return
                 }
 
-                
-                let userID = Auth.auth().currentUser?.uid
                 FireBaseClient().incrementBy(collection: "Users", document: "\(userID!)", fieldToInc: "questions", database: self.database!)
-                
-
-
                 let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "showQuestion") as! ShowQuestionViewController
                 nextVC.questionID = self.ref?.documentID
-                self.present(nextVC, animated: true, completion: nil)
+                self.tabBarController?.selectedIndex = 2
             }
         }else{
             showAlert(title: "Error", message: "Enter Your question ")

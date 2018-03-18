@@ -14,4 +14,9 @@ struct fourSquare {
     let clientSecret = "2S02ACEESIZFOSVC4P1LRTZRQGQK04WPROZDTYIBBDFG2RBE"
 }
 
+struct googleMaps{
+    let APIKey = "AIzaSyBndS9GFN7CI9DC8_WwwujYYFzYTcYWpCo"
+    let APIUrl = "https://maps.googleapis.com/maps/api/geocode/json?latlng="
+}
+
 

@@ -8,7 +8,7 @@
 
 import Foundation
 import MapKit
-
+import Alamofire
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
@@ -16,6 +16,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     var mUserLocation: CLLocation!
     var cityAsString: String? = nil
     var currentLocation: CLLocation!
+    let googleMapsApi = googleMaps()
     
     let authStatus = CLLocationManager.authorizationStatus()
     let inUse = CLAuthorizationStatus.authorizedWhenInUse
@@ -47,10 +48,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
         
         
+        
      
     }
     
-    func getAdress(completion: @escaping (_ address: JSONDictionary?, _ error: Error?) -> ()) {
+    func getAdress(completion: @escaping (_ address: String?, _ error: Error?) -> ()) {
         getUserLocation()
         self.locationManager.requestWhenInUseAuthorization()
         
@@ -58,29 +60,23 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             
             self.currentLocation = mUserLocation
             
-            let geoCoder = CLGeocoder()
-            
-            geoCoder.reverseGeocodeLocation(self.currentLocation) { placemarks, error in
+            //let geoCoder = CLGeocoder()
+
+            let latlng = "\(self.currentLocation.coordinate.latitude),\(self.currentLocation.coordinate.longitude)"
+            let url = "\(googleMaps().APIUrl)+\(latlng)&key=\(googleMaps().APIKey)"
+            Alamofire.request(url).responseJSON() {
+                response in
                 
-                if let e = error {
-                    
-                    completion(nil, e)
-                    
-                } else {
-                    
-                    let placeArray = placemarks
-                    
-                    var placeMark: CLPlacemark!
-                    
-                    placeMark = placeArray?[0]
-                    
-                    guard let address = placeMark.addressDictionary as? JSONDictionary else {
-                        return
+                if let result = response.result.value as? [String: Any], let addressComp = result["results"] as? NSArray {
+                    if let addressObject = addressComp.value(forKey: "address_components") as? NSArray, let cityArray = addressObject[0] as? NSArray{
+                        if let getCity = cityArray[3] as? [String:Any], let cityName = getCity["short_name"] {
+                            completion(cityName as! String, nil)
+                        }
                     }
-                    
-                    completion(address, nil)
-                    
+
                 }
+                
+                
                 
             }
             
@@ -94,6 +90,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
         alert.addAction(okBtn)
         print("ALEERT \(alert)")
+        
         //present(alert, animated: true, completion: nil)
         
     }

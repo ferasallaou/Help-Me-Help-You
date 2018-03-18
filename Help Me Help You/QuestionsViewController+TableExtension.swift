@@ -18,6 +18,11 @@ extension QuestionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell")
         let item = question[indexPath.row]
+        
+        if let qID = questionID as? String{ 
+            cell?.contentView.backgroundColor = UIColor.gray
+        }
+        
         cell?.textLabel?.text = item.question
         cell?.detailTextLabel?.text = "By \(item.userid) - On \(item.postedAt)"
         
@@ -27,9 +32,21 @@ extension QuestionsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = question[indexPath.row]
-        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "showQuestion") as! ShowQuestionViewController
-        nextVC.questionID = "\(item.docID) && \(item.question)"
-        self.navigationController!.pushViewController(nextVC, animated: true)
+        let getUserDetails = item.userReference
+        getUserDetails.getDocument { (returnedDoc, returnedErr) in
+        
+            guard returnedErr == nil else {
+                print("Error getting User Info")
+                return
+            }
+            
+            let fullname = (returnedDoc!["name"])!
+            let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "showQuestion") as! ShowQuestionViewController
+            nextVC.questionID = "\(item.docID) && \(item.question) ++ \(fullname)"
+            self.navigationController!.pushViewController(nextVC, animated: true)
+        }
+        
+        
     }
     
     

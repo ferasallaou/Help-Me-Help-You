@@ -84,11 +84,12 @@
                     <connections>
                         <outlet property="questionTextView" destination="eBY-zX-kbM" id="Lv6-jt-Oaa"/>
                         <outlet property="sendQuestionBtn" destination="RFs-h8-qE0" id="tIT-da-3Dz"/>
+                        <segue destination="o0I-55-vqx" kind="custom" identifier="questionToList" id="356-Ck-msj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hR-2g-mTI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-559" y="856"/>
+            <point key="canvasLocation" x="-777" y="855"/>
         </scene>
         <!--Show Question View Controller-->
         <scene sceneID="4Me-th-LE9">
@@ -115,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="322-t7-GDV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1751" y="854"/>
+            <point key="canvasLocation" x="934" y="1531"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Qem-3P-n3N">
@@ -246,10 +247,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4fd-5y-Fgf">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No question in Your City yet. Please Try again later, Or be the first one to Ask :)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SxZ-Ar-5W6">
+                                <rect key="frame" x="32" y="64" width="311" height="603"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Hh-Vd-q83">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="questionCell" textLabel="tY8-ed-xAH" detailTextLabel="chC-ru-cI5" style="IBUITableViewCellStyleSubtitle" id="6Zg-hI-HWG">
@@ -286,20 +293,38 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="3PR-ad-Beu" firstAttribute="bottom" secondItem="4fd-5y-Fgf" secondAttribute="bottom" id="4Kg-6a-uCG"/>
+                            <constraint firstItem="3PR-ad-Beu" firstAttribute="bottom" secondItem="SxZ-Ar-5W6" secondAttribute="bottom" id="8yE-cX-F53"/>
                             <constraint firstItem="4fd-5y-Fgf" firstAttribute="leading" secondItem="3PR-ad-Beu" secondAttribute="leading" id="GCT-zd-8lL"/>
                             <constraint firstItem="4fd-5y-Fgf" firstAttribute="trailing" secondItem="3PR-ad-Beu" secondAttribute="trailing" id="GDJ-cI-dpt"/>
+                            <constraint firstItem="SxZ-Ar-5W6" firstAttribute="top" secondItem="3PR-ad-Beu" secondAttribute="top" id="Xex-AG-L1i"/>
+                            <constraint firstItem="3PR-ad-Beu" firstAttribute="trailing" secondItem="SxZ-Ar-5W6" secondAttribute="trailing" constant="32" id="d0g-8T-1f0"/>
                             <constraint firstItem="3PR-ad-Beu" firstAttribute="bottom" secondItem="4Hh-Vd-q83" secondAttribute="bottom" id="f9C-Ts-i0p"/>
                             <constraint firstItem="3PR-ad-Beu" firstAttribute="trailing" secondItem="4Hh-Vd-q83" secondAttribute="trailing" id="ger-T2-Eko"/>
                             <constraint firstItem="4fd-5y-Fgf" firstAttribute="top" secondItem="3PR-ad-Beu" secondAttribute="top" id="hhX-y1-7Z6"/>
                             <constraint firstItem="4Hh-Vd-q83" firstAttribute="top" secondItem="3PR-ad-Beu" secondAttribute="top" id="lZT-YU-fFw"/>
+                            <constraint firstItem="SxZ-Ar-5W6" firstAttribute="leading" secondItem="3PR-ad-Beu" secondAttribute="leading" constant="32" id="s20-So-uWm"/>
                             <constraint firstItem="4Hh-Vd-q83" firstAttribute="leading" secondItem="3PR-ad-Beu" secondAttribute="leading" id="wU7-9J-l1U"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3PR-ad-Beu"/>
                     </view>
-                    <navigationItem key="navigationItem" id="AFt-xj-atD"/>
+                    <navigationItem key="navigationItem" id="AFt-xj-atD">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="TUv-tK-EgL">
+                            <connections>
+                                <action selector="refreshData:" destination="gzT-j6-VlL" id="4hQ-9T-YDO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="pin" id="3m0-By-hoL">
+                            <connections>
+                                <action selector="refreshLocation:" destination="gzT-j6-VlL" id="QPd-so-Cha"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="4fd-5y-Fgf" id="Ubr-7f-CV7"/>
+                        <outlet property="noQuestionsLable" destination="SxZ-Ar-5W6" id="d7a-Le-z3c"/>
                         <outlet property="questionTable" destination="4Hh-Vd-q83" id="PPW-Qw-xn4"/>
+                        <outlet property="refreshDataBtn" destination="TUv-tK-EgL" id="63M-ty-Wy3"/>
+                        <outlet property="refreshLocationBtn" destination="3m0-By-hoL" id="AZC-pN-uaU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qai-g5-KBD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -348,7 +373,7 @@
         <!--Questions-->
         <scene sceneID="dKw-o9-swz">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o0I-55-vqx" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="questionsVC" automaticallyAdjustsScrollViewInsets="NO" id="o0I-55-vqx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Questions" id="bZv-Ok-pbR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hqI-Ml-yPR">
@@ -365,4 +390,10 @@
             <point key="canvasLocation" x="176" y="855.47226386806608"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pin" width="22" height="22"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="356-Ck-msj"/>
+    </inferredMetricsTieBreakers>
 </document>
