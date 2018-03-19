@@ -23,12 +23,15 @@ class AskForHelpViewController: UIViewController {
     var cityName: String!
     var userLocation : CLLocation!
     var questionID: String?
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         questionTextView.delegate = self
         questionTextView.layer.borderColor = UIColor.gray.cgColor
         questionTextView.layer.borderWidth = 1.0
         database = Firestore.firestore()
+        
         
         // Do any additional setup after loading the view.
     }
@@ -38,6 +41,7 @@ class AskForHelpViewController: UIViewController {
         super.viewWillAppear(animated)
         self.sendQuestionBtn.isEnabled = false
         self.sendQuestionBtn.titleLabel?.text = "Getting City Name...."
+     
         customLocationManager.getAdress() {
             (address, error) in
             
@@ -84,11 +88,9 @@ class AskForHelpViewController: UIViewController {
                 }
 
                 FireBaseClient().incrementBy(collection: "Users", document: "\(userID!)", fieldToInc: "questions", database: self.database!)
-                let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "showQuestion") as! ShowQuestionViewController
-                nextVC.questionID = self.ref?.documentID
                 self.questionID = self.ref?.documentID
-                self.performSegue(withIdentifier: "questionToList", sender: self)
-                //self.tabBarController?.selectedIndex = 2
+                self.appDelegate.sharedData.set(self.questionID, forKey: "postedQuestionID")
+                self.tabBarController?.selectedIndex = 2
             }
         }else{
             showAlert(title: "Error", message: "Enter Your question ")
@@ -96,10 +98,5 @@ class AskForHelpViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let mainNC = segue.destination
-        let childs = mainNC.childViewControllers[0] as! QuestionsViewController
-        childs.questionID = self.questionID
-    }
 
 }
