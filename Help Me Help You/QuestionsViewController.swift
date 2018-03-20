@@ -11,15 +11,6 @@ import Firebase
 
 class QuestionsViewController: UIViewController{
 
-    struct questionDT {
-        var cityCoordinates: GeoPoint
-        var cityName: String
-        var postedAt: Date
-        var question: String
-        var userid: String
-        var docID: String
-        var userReference: DocumentReference
-    }
     
     // Outlets
     @IBOutlet weak var refreshDataBtn: UIBarButtonItem!
@@ -29,7 +20,7 @@ class QuestionsViewController: UIViewController{
     @IBOutlet weak var noQuestionsLable: UILabel!
     
     
-    var question: [questionDT] = [questionDT]()
+    var question: [Question] = [Question]()
     var ref : DocumentReference? = nil
     var database : Firestore? = nil
     var userCity: String? = nil
@@ -109,22 +100,14 @@ class QuestionsViewController: UIViewController{
                 }else{
                     for singleDoc in (documents?.documents)! {
                         let singleObject = singleDoc.data()
-                        let newQuest = questionDT(cityCoordinates: singleObject["cityCoordinates"] as! GeoPoint, cityName: singleObject["cityName"] as! String, postedAt: singleObject["postedAt"] as! Date, question: singleObject["question"] as! String, userid: singleObject["userid"] as! String, docID: singleDoc.documentID, userReference: singleObject["userReference"] as! DocumentReference)
+                        let newQuest = Question.init(cityCoordinates: singleObject["cityCoordinates"] as! GeoPoint, cityName: singleObject["cityName"] as! String, postedAt: singleObject["postedAt"] as! Date, question: singleObject["question"] as! String, userid: singleObject["userid"] as! String, docID: singleDoc.documentID, userReference: singleObject["userReference"] as! DocumentReference)
                         self.question.append(newQuest)
                     }
                     
                     self.questionTable.isHidden = false
                     self.questionTable.reloadData()
                 }
-                
-                
-                
-                
             }
-            
         }
-
-        
     }
-
 }

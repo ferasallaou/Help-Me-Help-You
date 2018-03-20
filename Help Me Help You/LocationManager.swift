@@ -66,7 +66,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             let url = "\(googleMaps().APIUrl)+\(latlng)&key=\(googleMaps().APIKey)"
             Alamofire.request(url).responseJSON() {
                 response in
-                
+            
                 if let result = response.result.value as? [String: Any], let addressComp = result["results"] as? NSArray {
                     if let addressObject = addressComp.value(forKey: "address_components") as? NSArray, let cityArray = addressObject[0] as? NSArray{
                         if let getCity = cityArray[3] as? [String:Any], let cityName = getCity["short_name"] {

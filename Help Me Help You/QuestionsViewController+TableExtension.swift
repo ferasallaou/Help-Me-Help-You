@@ -45,9 +45,8 @@ extension QuestionsViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             
-            let fullname = (returnedDoc!["name"])!
-            let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "showQuestion") as! ShowQuestionViewController
-            nextVC.questionID = "\(item.docID) && \(item.question) ++ \(fullname)"
+            let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "showQuestion") as! AnswersViewController
+            nextVC.question = item
             self.navigationController!.pushViewController(nextVC, animated: true)
         }
         

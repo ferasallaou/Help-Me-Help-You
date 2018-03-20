@@ -7,11 +7,12 @@
 //
 
 import Foundation
-
+import Firebase
 
 struct fourSquare {
     let clientID = "JMATOSMAUVVTRKTF33QBEH5TEUJ0CGXUYIT55ZEGEDNAB3EY"
     let clientSecret = "2S02ACEESIZFOSVC4P1LRTZRQGQK04WPROZDTYIBBDFG2RBE"
+    let getVenus = "https://api.foursquare.com/v2/venues/explore"
 }
 
 struct googleMaps{
@@ -19,4 +20,18 @@ struct googleMaps{
     let APIUrl = "https://maps.googleapis.com/maps/api/geocode/json?latlng="
 }
 
+struct Question {
+    var cityCoordinates: GeoPoint
+    var cityName: String
+    var postedAt: Date
+    var question: String
+    var userid: String
+    var docID: String
+    var userReference: DocumentReference
+}
+
+struct Venues {
+    var id: String
+    var name: String
+}
 

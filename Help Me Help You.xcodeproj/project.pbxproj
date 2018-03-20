@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		38844035351F1781989FB7D4 /* Pods_Help_Me_Help_You.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5287338EA69F50CA59EC44A /* Pods_Help_Me_Help_You.framework */; };
+		E01FAB272060DFFB0021E990 /* VenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01FAB262060DFFB0021E990 /* VenueViewController.swift */; };
 		E022208F204FD0AE006CC06A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022208E204FD0AE006CC06A /* Constants.swift */; };
 		E0222091204FD22C006CC06A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0222090204FD22B006CC06A /* GoogleService-Info.plist */; };
 		E035A1712056415200C1F68C /* AskForHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035A1702056415200C1F68C /* AskForHelpViewController.swift */; };
@@ -18,12 +19,14 @@
 		E03E273A204FC89D00FCD334 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03E2738204FC89D00FCD334 /* Main.storyboard */; };
 		E03E273C204FC89D00FCD334 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E03E273B204FC89D00FCD334 /* Assets.xcassets */; };
 		E03E273F204FC89D00FCD334 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03E273D204FC89D00FCD334 /* LaunchScreen.storyboard */; };
+		E077A90C2060A49E004B5853 /* AnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E077A90B2060A49E004B5853 /* AnswersViewController.swift */; };
+		E077A90E2060B73D004B5853 /* SuggestionVC+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E077A90D2060B73D004B5853 /* SuggestionVC+Extension.swift */; };
 		E078979B2058C26500BB114C /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078979A2058C26500BB114C /* QuestionsViewController.swift */; };
 		E078979D2058C30700BB114C /* QuestionsViewController+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078979C2058C30700BB114C /* QuestionsViewController+TableExtension.swift */; };
 		E07897A12058CAF300BB114C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07897A02058CAF300BB114C /* LocationManager.swift */; };
 		E08A358420536D2F00B47414 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A358320536D2F00B47414 /* LoginViewController.swift */; };
 		E08A35862053709100B47414 /* LoginViewController+LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */; };
-		E0AFDE72205667180018C2DC /* ShowQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AFDE71205667180018C2DC /* ShowQuestionViewController.swift */; };
+		E0AFDE72205667180018C2DC /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AFDE71205667180018C2DC /* SuggestionViewController.swift */; };
 		E0C9BCF72057C31100B3869F /* GetUserNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C9BCF62057C31100B3869F /* GetUserNameViewController.swift */; };
 		E0F00AE12056482F00317C01 /* AskForHelpVC+LocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */; };
 		E0F00AE3205654F600317C01 /* AskForHelpVC+TextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */; };
@@ -33,6 +36,7 @@
 		3554F6B304B1FFC9217C0B00 /* Pods-Help Me Help You.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Help Me Help You.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Help Me Help You/Pods-Help Me Help You.debug.xcconfig"; sourceTree = "<group>"; };
 		5A89A9133E171E35C6A43A4A /* Pods-Help Me Help You.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Help Me Help You.release.xcconfig"; path = "Pods/Target Support Files/Pods-Help Me Help You/Pods-Help Me Help You.release.xcconfig"; sourceTree = "<group>"; };
 		B5287338EA69F50CA59EC44A /* Pods_Help_Me_Help_You.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Help_Me_Help_You.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E01FAB262060DFFB0021E990 /* VenueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueViewController.swift; sourceTree = "<group>"; };
 		E022208E204FD0AE006CC06A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E0222090204FD22B006CC06A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E035A1702056415200C1F68C /* AskForHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForHelpViewController.swift; sourceTree = "<group>"; };
@@ -45,12 +49,14 @@
 		E03E273B204FC89D00FCD334 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E03E273E204FC89D00FCD334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E03E2740204FC89D00FCD334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E077A90B2060A49E004B5853 /* AnswersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersViewController.swift; sourceTree = "<group>"; };
+		E077A90D2060B73D004B5853 /* SuggestionVC+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionVC+Extension.swift"; sourceTree = "<group>"; };
 		E078979A2058C26500BB114C /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		E078979C2058C30700BB114C /* QuestionsViewController+TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionsViewController+TableExtension.swift"; sourceTree = "<group>"; };
 		E07897A02058CAF300BB114C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E08A358320536D2F00B47414 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+LoginExtension.swift"; sourceTree = "<group>"; };
-		E0AFDE71205667180018C2DC /* ShowQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQuestionViewController.swift; sourceTree = "<group>"; };
+		E0AFDE71205667180018C2DC /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		E0C9BCF62057C31100B3869F /* GetUserNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserNameViewController.swift; sourceTree = "<group>"; };
 		E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForHelpVC+LocationExtension.swift"; sourceTree = "<group>"; };
 		E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForHelpVC+TextViewExtension.swift"; sourceTree = "<group>"; };
@@ -120,12 +126,15 @@
 				E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */,
 				E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */,
 				E035A1722056429800C1F68C /* LocationMangerController.swift */,
-				E0AFDE71205667180018C2DC /* ShowQuestionViewController.swift */,
 				E0C9BCF62057C31100B3869F /* GetUserNameViewController.swift */,
 				E03A42022057E116001B9C47 /* FireBaseClient.swift */,
 				E078979A2058C26500BB114C /* QuestionsViewController.swift */,
 				E078979C2058C30700BB114C /* QuestionsViewController+TableExtension.swift */,
 				E07897A02058CAF300BB114C /* LocationManager.swift */,
+				E077A90B2060A49E004B5853 /* AnswersViewController.swift */,
+				E0AFDE71205667180018C2DC /* SuggestionViewController.swift */,
+				E077A90D2060B73D004B5853 /* SuggestionVC+Extension.swift */,
+				E01FAB262060DFFB0021E990 /* VenueViewController.swift */,
 			);
 			path = "Help Me Help You";
 			sourceTree = "<group>";
@@ -289,15 +298,18 @@
 				E035A1712056415200C1F68C /* AskForHelpViewController.swift in Sources */,
 				E078979D2058C30700BB114C /* QuestionsViewController+TableExtension.swift in Sources */,
 				E03A42032057E116001B9C47 /* FireBaseClient.swift in Sources */,
+				E01FAB272060DFFB0021E990 /* VenueViewController.swift in Sources */,
 				E078979B2058C26500BB114C /* QuestionsViewController.swift in Sources */,
 				E03E2737204FC89D00FCD334 /* MainViewController.swift in Sources */,
-				E0AFDE72205667180018C2DC /* ShowQuestionViewController.swift in Sources */,
+				E077A90C2060A49E004B5853 /* AnswersViewController.swift in Sources */,
+				E0AFDE72205667180018C2DC /* SuggestionViewController.swift in Sources */,
 				E035A1732056429800C1F68C /* LocationMangerController.swift in Sources */,
 				E0F00AE3205654F600317C01 /* AskForHelpVC+TextViewExtension.swift in Sources */,
 				E0C9BCF72057C31100B3869F /* GetUserNameViewController.swift in Sources */,
 				E03E2735204FC89D00FCD334 /* AppDelegate.swift in Sources */,
 				E08A35862053709100B47414 /* LoginViewController+LoginExtension.swift in Sources */,
 				E022208F204FD0AE006CC06A /* Constants.swift in Sources */,
+				E077A90E2060B73D004B5853 /* SuggestionVC+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
