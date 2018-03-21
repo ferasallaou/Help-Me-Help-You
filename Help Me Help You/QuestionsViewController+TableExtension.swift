@@ -22,7 +22,7 @@ extension QuestionsViewController: UITableViewDelegate, UITableViewDataSource {
     
         
         cell?.textLabel?.text = item.question
-        cell?.detailTextLabel?.text = "By \(item.userid) - On \(item.postedAt)"
+        cell?.detailTextLabel?.text = "On \(item.postedAt) - \(item.suggestions) Suggestions"
         
         return cell!
     }
@@ -30,7 +30,8 @@ extension QuestionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         let item = question[indexPath.row]
-        if let qID = questionID, item.docID == qID{    
+        
+        if let qID = questionID, item.docID == qID{
             cell.setSelected(true, animated: true)
             questionID = nil
         }

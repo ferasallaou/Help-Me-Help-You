@@ -69,13 +69,16 @@ class AskForHelpViewController: UIViewController {
         if let question = questionTextView.text, question != "Write Your Question" || question == "" {
             let userID = Auth.auth().currentUser?.uid
             let userReference = self.database!.collection("Users").document(userID!)
+            
+            // Saving Objects is not supported yet, thus we will save as dictionary :)
             let dataToSave = [
                 "question": question,
                 "userid": Auth.auth().currentUser!.uid,
                 "cityName": cityName,
                 "cityCoordinates": GeoPoint(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude),
                 "postedAt": Date(),
-                "userReference": userReference
+                "userReference": userReference,
+                "suggestions": 0
                 ] as [String : Any]
             
             ref = database!.collection("Questions").addDocument(data: dataToSave) {

@@ -24,6 +24,9 @@
 		E078979B2058C26500BB114C /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078979A2058C26500BB114C /* QuestionsViewController.swift */; };
 		E078979D2058C30700BB114C /* QuestionsViewController+TableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078979C2058C30700BB114C /* QuestionsViewController+TableExtension.swift */; };
 		E07897A12058CAF300BB114C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07897A02058CAF300BB114C /* LocationManager.swift */; };
+		E07BE00920627D8E00AA48DD /* MainViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07BE00820627D8E00AA48DD /* MainViewController+Extension.swift */; };
+		E07C33FF20623BBD00A54BBD /* AnswersViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07C33FE20623BBD00A54BBD /* AnswersViewController+Extension.swift */; };
+		E07C340120624DFD00A54BBD /* VenueViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07C340020624DFD00A54BBD /* VenueViewController+Extensions.swift */; };
 		E08A358420536D2F00B47414 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A358320536D2F00B47414 /* LoginViewController.swift */; };
 		E08A35862053709100B47414 /* LoginViewController+LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */; };
 		E0AFDE72205667180018C2DC /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AFDE71205667180018C2DC /* SuggestionViewController.swift */; };
@@ -54,6 +57,9 @@
 		E078979A2058C26500BB114C /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		E078979C2058C30700BB114C /* QuestionsViewController+TableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuestionsViewController+TableExtension.swift"; sourceTree = "<group>"; };
 		E07897A02058CAF300BB114C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E07BE00820627D8E00AA48DD /* MainViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Extension.swift"; sourceTree = "<group>"; };
+		E07C33FE20623BBD00A54BBD /* AnswersViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnswersViewController+Extension.swift"; sourceTree = "<group>"; };
+		E07C340020624DFD00A54BBD /* VenueViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VenueViewController+Extensions.swift"; sourceTree = "<group>"; };
 		E08A358320536D2F00B47414 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+LoginExtension.swift"; sourceTree = "<group>"; };
 		E0AFDE71205667180018C2DC /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +121,7 @@
 			children = (
 				E03E2734204FC89D00FCD334 /* AppDelegate.swift */,
 				E03E2736204FC89D00FCD334 /* MainViewController.swift */,
+				E07BE00820627D8E00AA48DD /* MainViewController+Extension.swift */,
 				E03E2738204FC89D00FCD334 /* Main.storyboard */,
 				E03E273B204FC89D00FCD334 /* Assets.xcassets */,
 				E03E273D204FC89D00FCD334 /* LaunchScreen.storyboard */,
@@ -132,9 +139,11 @@
 				E078979C2058C30700BB114C /* QuestionsViewController+TableExtension.swift */,
 				E07897A02058CAF300BB114C /* LocationManager.swift */,
 				E077A90B2060A49E004B5853 /* AnswersViewController.swift */,
+				E07C33FE20623BBD00A54BBD /* AnswersViewController+Extension.swift */,
 				E0AFDE71205667180018C2DC /* SuggestionViewController.swift */,
 				E077A90D2060B73D004B5853 /* SuggestionVC+Extension.swift */,
 				E01FAB262060DFFB0021E990 /* VenueViewController.swift */,
+				E07C340020624DFD00A54BBD /* VenueViewController+Extensions.swift */,
 			);
 			path = "Help Me Help You";
 			sourceTree = "<group>";
@@ -296,9 +305,12 @@
 				E08A358420536D2F00B47414 /* LoginViewController.swift in Sources */,
 				E07897A12058CAF300BB114C /* LocationManager.swift in Sources */,
 				E035A1712056415200C1F68C /* AskForHelpViewController.swift in Sources */,
+				E07C340120624DFD00A54BBD /* VenueViewController+Extensions.swift in Sources */,
 				E078979D2058C30700BB114C /* QuestionsViewController+TableExtension.swift in Sources */,
 				E03A42032057E116001B9C47 /* FireBaseClient.swift in Sources */,
 				E01FAB272060DFFB0021E990 /* VenueViewController.swift in Sources */,
+				E07C33FF20623BBD00A54BBD /* AnswersViewController+Extension.swift in Sources */,
+				E07BE00920627D8E00AA48DD /* MainViewController+Extension.swift in Sources */,
 				E078979B2058C26500BB114C /* QuestionsViewController.swift in Sources */,
 				E03E2737204FC89D00FCD334 /* MainViewController.swift in Sources */,
 				E077A90C2060A49E004B5853 /* AnswersViewController.swift in Sources */,

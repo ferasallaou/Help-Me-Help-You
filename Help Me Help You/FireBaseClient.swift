@@ -18,7 +18,6 @@ class FireBaseClient {
     {
      
         let docRef = database.collection("\(collection)").document("\(document!)")
-        
         database.runTransaction({ (transaction, error) -> Any? in
             do {
                 let refTransactoin = try transaction.getDocument(docRef).data()

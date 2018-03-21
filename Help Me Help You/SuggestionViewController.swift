@@ -57,13 +57,12 @@ class SuggestionViewController: UIViewController {
                 let code = (statusCode!["code"])! as? Int
                 if code == 200 {
                     if let responseObj = results["response"] as? [String: Any], responseObj["totalResults"] as! Int > 0 {
-                        print("\(responseObj["totalResults"])")
                         let groups = responseObj["groups"] as? [Any]
                         let itemsArr = groups![0] as? [String: Any]
                         let items = itemsArr!["items"] as? [[String:Any]]
                         for singleItem in items! {
                             let singleVenue = singleItem["venue"] as? [String: Any]
-                            let venue = Venues(id: singleVenue!["id"] as! String , name: singleVenue!["name"] as! String)
+                            let venue = Venues(id: singleVenue!["id"] as! String , name: singleVenue!["name"] as! String, lat: 1.00, lng: 1.00, url: "", category:"")
                             self.venuesArr.append(venue)
                         }
                     }

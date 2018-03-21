@@ -100,7 +100,7 @@ class QuestionsViewController: UIViewController{
                 }else{
                     for singleDoc in (documents?.documents)! {
                         let singleObject = singleDoc.data()
-                        let newQuest = Question.init(cityCoordinates: singleObject["cityCoordinates"] as! GeoPoint, cityName: singleObject["cityName"] as! String, postedAt: singleObject["postedAt"] as! Date, question: singleObject["question"] as! String, userid: singleObject["userid"] as! String, docID: singleDoc.documentID, userReference: singleObject["userReference"] as! DocumentReference)
+                        let newQuest = Question.init(cityCoordinates: singleObject["cityCoordinates"] as! GeoPoint, cityName: singleObject["cityName"] as! String, postedAt: singleObject["postedAt"] as! Date, question: singleObject["question"] as! String, userid: singleObject["userid"] as! String, docID: singleDoc.documentID, userReference: singleObject["userReference"] as! DocumentReference, suggestions: singleObject["suggestions"] as! Int)
                         self.question.append(newQuest)
                     }
                     
