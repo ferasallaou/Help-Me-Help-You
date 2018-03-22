@@ -60,7 +60,7 @@ class AnswersViewController: UIViewController {
         suggestionsTable.isHidden = true
         activityIndicator.startAnimating()
         activityIndicator.isHidden = false
-        print("Getting")
+        
         let quesRef = database.collection("Questions").document("\((question?.docID)!)")
         database.collection("Answers").whereField("questionRef", isEqualTo: quesRef).getDocuments(completion: {
             (snapshots, snapshotserror) in
@@ -70,7 +70,7 @@ class AnswersViewController: UIViewController {
                 return
             }
             
-            print("No Errro")
+            
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
             
@@ -78,7 +78,7 @@ class AnswersViewController: UIViewController {
                 print("Less than 1")
               self.noSuggestionsLable.isHidden = false
             }else{
-                print("Grreater than 1")
+                
                 for singleItem in (snapshots?.documents)! {
                     let item = singleItem.data()
                     let venue = Venues(id: item["venueID"] as! String,
@@ -89,7 +89,7 @@ class AnswersViewController: UIViewController {
                                 category: item["category"] as! String)
                     self.suggestions.append(venue)
                 }
-                print("Done")
+
             self.suggestionsTable.isHidden = false
             self.suggestionsTable.reloadData()
             }

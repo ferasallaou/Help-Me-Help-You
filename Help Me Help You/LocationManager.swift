@@ -17,29 +17,44 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     var cityAsString: String? = nil
     var currentLocation: CLLocation!
     let googleMapsApi = googleMaps()
-    
+    var isAuth = false
     let authStatus = CLLocationManager.authorizationStatus()
     let inUse = CLAuthorizationStatus.authorizedWhenInUse
     let always = CLAuthorizationStatus.authorizedAlways
     
-    func getUserLocation() {
+    func getUserLocation(){
+            locationManager.delegate = self
             locationManager.requestWhenInUseAuthorization()
+        
             let isLocationAuth = CLLocationManager.authorizationStatus()
             if isLocationAuth != .authorizedAlways && isLocationAuth != .authorizedWhenInUse {
-                showAlert(title: "Location Service", message: "This app needs to use Location Service, Please grant the permissions.")
+                print( "This app needs to use Location Service, Please grant the permissions.")
             }else if !CLLocationManager.locationServicesEnabled(){
-                showAlert(title: "Location Service", message: "Location Service is Disabled.")
+                print("Location Service is Disabled.")
             }else{
+                isAuth = true
                 locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
                 locationManager.distanceFilter = 1000.0  // In meters.
                 locationManager.delegate = self
                 locationManager.startUpdatingLocation()
                 mUserLocation = locationManager.location
             }
+
     }
     
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("Did change")
+        switch status{
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("author")
+            break
+        case .denied, .notDetermined, .restricted:
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("HIT ME")
         if let tryUserLocation = locations.last {
             mUserLocation = CLLocation(latitude: tryUserLocation.coordinate.latitude, longitude: tryUserLocation.coordinate.longitude)
         }else{
@@ -53,9 +68,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func getAdress(completion: @escaping (_ address: String?, _ error: Error?) -> ()) {
+
         getUserLocation()
-        self.locationManager.requestWhenInUseAuthorization()
-        
         if self.authStatus == inUse || self.authStatus == always {
             
             self.currentLocation = mUserLocation
@@ -75,22 +89,26 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                     }
 
                 }
-                
-                
-                
-            }
-            
+            }   
         }
         
     }
+    
+    func getAuthStatus() -> Bool{
+        if self.authStatus == inUse || self.authStatus == always {
+            return true
+        }else {
+            return false
+        }
+    }
+    
     
     func showAlert(title: String,message: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okBtn = UIAlertAction(title: "Ok", style: .default, handler: nil)
         
         alert.addAction(okBtn)
-        print("ALEERT \(alert)")
-        
+
         //present(alert, animated: true, completion: nil)
         
     }

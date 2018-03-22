@@ -23,11 +23,6 @@ class GetUserNameViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     @IBAction func saveUserName(_ sender: Any) {
         proceedBtn.isEnabled = false
@@ -44,6 +39,7 @@ class GetUserNameViewController: UIViewController {
                 "questions": 0,
                 "answers" : 0,
                 "score": 0,
+                "lastAnswer": Date()
             ] as [String:Any]
             
             let userID = Auth.auth().currentUser?.uid
@@ -61,14 +57,4 @@ class GetUserNameViewController: UIViewController {
             }
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

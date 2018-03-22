@@ -20,6 +20,7 @@ class QuestionsViewController: UIViewController{
     @IBOutlet weak var noQuestionsLable: UILabel!
     
     
+    
     var question: [Question] = [Question]()
     var ref : DocumentReference? = nil
     var database : Firestore? = nil
@@ -27,12 +28,14 @@ class QuestionsViewController: UIViewController{
     let customLocation = LocationManager()
     var questionID : String?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var userHandler: AuthStateDidChangeListenerHandle?
     
     override func viewDidLoad() {
+
         question = []
         super.viewDidLoad()
         database = Firestore.firestore()
-        self.getQuestions()
+        
         questionID = nil
         
         // Do any additional setup after loading the view.
@@ -40,13 +43,29 @@ class QuestionsViewController: UIViewController{
 
 
     override func viewWillAppear(_ animated: Bool) {
-        questionID = appDelegate.sharedData.value(forKey: "postedQuestionID") as? String
-        self.getQuestions()
+        
         super.viewWillAppear(animated)
+        userHandler = Auth.auth().addStateDidChangeListener {
+            (auth, user) in
+            
+            guard user != nil else {
+                let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC")
+                self.present(loginVC!, animated: true, completion: nil)
+                return
+            }
+            
+        self.questionID = self.appDelegate.sharedData.value(forKey: "postedQuestionID") as? String
+            self.getQuestions()
+            
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        if let userHandler = userHandler {
+            Auth.auth().removeStateDidChangeListener(userHandler)
+        }
         appDelegate.sharedData.set(nil, forKey: "postedQuestionID")
         questionID = nil
 
@@ -69,8 +88,11 @@ class QuestionsViewController: UIViewController{
         questionTable.isHidden = true
         self.refreshDataBtn.isEnabled = false
         self.refreshLocationBtn.isEnabled = false
+        
+        customLocation.locationManager.requestWhenInUseAuthorization()
         customLocation.getAdress() {
             (address, error) in
+            
             
             guard error == nil else {
                 print("Couldn't get new Address :( ")
@@ -83,7 +105,7 @@ class QuestionsViewController: UIViewController{
             }
             
             self.navigationController?.navigationBar.topItem?.title = self.userCity
-            let query = self.database!.collection("Questions").whereField("cityName", isEqualTo: self.userCity!).order(by: "postedAt", descending: true)
+            let query = self.database!.collection("Questions").whereField("cityName", isEqualTo: self.userCity!).order(by: "score", descending: true)
             query.getDocuments { (documents, error) in
                 guard error == nil else {
                     print("Error Getting Data \(error!.localizedDescription)")

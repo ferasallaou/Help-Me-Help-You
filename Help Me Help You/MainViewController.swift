@@ -20,51 +20,32 @@ class MainViewController: UIViewController {
     @IBOutlet weak var noQuestionsLable: UILabel!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    var userHandler: AuthStateDidChangeListenerHandle?
+    
     var questions = [Question]()
     let customLocationManager = LocationManager()
     var database: Firestore!
     
-    @IBAction func loginBtn(_ sender: Any) {
-        if Auth.auth().currentUser != nil {
-            do {
-            try Auth.auth().signOut()
-                let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC")
-                self.present(loginVC!, animated: true, completion: nil)
-            }catch let error as NSError{
-                print("Logout error \(error.localizedDescription)")
-            }
-        }
-    }
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        customLocationManager.getUserLocation()
+        customLocationManager.getUserLocation() 
          database = Firestore.firestore()
-        getQuestions()
+
         // Do any additional setup after loading the view, typically from a nib.
     }
 
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if let userHandler = userHandler {
-        Auth.auth().removeStateDidChangeListener(userHandler)
-        }
+        
     }
 
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userHandler = Auth.auth().addStateDidChangeListener {
-            (auth, user) in
-            
-            guard user != nil else {
-                let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC")
-                self.present(loginVC!, animated: true, completion: nil)
-                return
-            }
-        }
+        getUserInfo()
+        getQuestions()
     }
 
     
@@ -77,7 +58,7 @@ class MainViewController: UIViewController {
             (userDocs, userErr) in
             
             guard userErr == nil else {
-                print("There was an Error! \(userErr?.localizedDescription)")
+                print("There was an Error! \(String(describing: userErr?.localizedDescription))")
                 return
             }
             
@@ -108,6 +89,41 @@ class MainViewController: UIViewController {
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
                 self.noQuestionsLable.isHidden = false
+            }
+        }
+    }
+    
+    func getUserInfo() {
+        
+        let userID = Auth.auth().currentUser?.uid
+        database.collection("Users").document("\(userID!)").getDocument { (userSnapShot, userError) in
+            
+            guard userError == nil else {
+                print("There was an Error getting User's Data")
+                return
+            }
+            
+            let userData = userSnapShot?.data()
+            self.mainLable.text = "\((userData!["name"])!) \n Score: \((userData!["score"])!) \n Total Questions: \((userData!["questions"])!) \n Total Answers: \((userData!["answers"])!)"
+        }
+    }
+    
+    @IBAction func aboutBtn(_ sender: Any) {
+        let appDescription = "Help Me Help You is an App designed to help using real locations with one idea, the more you help people, the more your chance of getting help. And in case you are wondering, the App just covers your city in an attempt to give authentic answers."
+        let about = UIAlertController(title: "About", message: appDescription, preferredStyle: UIAlertControllerStyle.alert)
+        let gotItBtn = UIAlertAction(title: "Got It", style: UIAlertActionStyle.default, handler: nil)
+        about.addAction(gotItBtn)
+        self.present(about, animated: true, completion: nil)
+    }
+    
+    @IBAction func loginBtn(_ sender: Any) {
+        if Auth.auth().currentUser != nil {
+            do {
+                try Auth.auth().signOut()
+                let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC")
+                self.present(loginVC!, animated: true, completion: nil)
+            }catch let error as NSError{
+                print("Logout error \(error.localizedDescription)")
             }
         }
     }

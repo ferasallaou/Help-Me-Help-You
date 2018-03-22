@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
 
@@ -15,16 +16,16 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginSignupBtn: UIButton!
     @IBOutlet weak var responseLable: UILabel!
+    let database = Firestore.firestore()
+    let customLocation =  LocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        customLocation.getUserLocation()
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
     @IBAction func loginBtn(_ sender: Any) {
         responseLable.text = ""
@@ -45,6 +46,7 @@ class LoginViewController: UIViewController {
             return
         }
         
+
         self.loginOrSignUp(email: emailTextField.text!, password: passwordTextField.text!) {
             (error, userSatus) in
             
@@ -54,8 +56,25 @@ class LoginViewController: UIViewController {
                 return
             }
             
+            let userID = Auth.auth().currentUser?.uid
+            self.database.collection("Users").document("\(userID!)").getDocument(completion: { (gotUser, noUser) in
+                
+                guard noUser == nil else {
+                    print("Error Checking User Info")
+                    return
+                }
+                
+                if let _ = gotUser?.data() {
+                    self.dismiss(animated: true, completion: nil)
+                }else{
+                    let userNameVC = self.storyboard?.instantiateViewController(withIdentifier: "userNameVC")
+                    self.present(userNameVC!, animated: true, completion: nil)
+                    return
+                }
+            })
             
-            self.dismiss(animated: true, completion: nil)
+            
+            
         }
         
         

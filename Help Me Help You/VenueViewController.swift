@@ -31,7 +31,6 @@ class VenueViewController: UIViewController {
         {
             getVenueDetails()
         }else{
-            print("Herelaaa")
             visitPage.isEnabled = true
             self.categoryLable.text =  "Category: \((self.mVenue!.category))"
             self.setMapAnnotation(lat: self.mVenue!.lat, lon: self.mVenue!.lng)
@@ -72,7 +71,9 @@ class VenueViewController: UIViewController {
                         return
                     }
                     
-                    FireBaseClient().incrementBy(collection: "Questions", document: self.question!.docID, fieldToInc: "suggestions", database: self.database)
+                    FireBaseClient().incrementBy(collection: "Questions", document: self.question!.docID, fieldToInc: "suggestions", database: self.database, scoreObject: false)
+                    let userID = Auth.auth().currentUser?.uid
+                    FireBaseClient().incrementBy(collection: "Users", document: userID!, fieldToInc: "answers", database: self.database, scoreObject: true)
                     self.dismiss(animated: true, completion: nil)
                 }
             }else{

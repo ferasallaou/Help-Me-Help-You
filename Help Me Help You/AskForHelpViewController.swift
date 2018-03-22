@@ -24,6 +24,7 @@ class AskForHelpViewController: UIViewController {
     var userLocation : CLLocation!
     var questionID: String?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var mUserScore = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +32,6 @@ class AskForHelpViewController: UIViewController {
         questionTextView.layer.borderColor = UIColor.gray.cgColor
         questionTextView.layer.borderWidth = 1.0
         database = Firestore.firestore()
-        
-        
         // Do any additional setup after loading the view.
     }
     
@@ -50,11 +49,25 @@ class AskForHelpViewController: UIViewController {
                 return
             }
             
-            self.sendQuestionBtn.isEnabled = true
-            self.sendQuestionBtn.titleLabel?.text = "Send your question"
+            let userID = Auth.auth().currentUser?.uid
+            self.database!.collection("Users").document(userID!).getDocument(completion: { (userData, userError) in
+                guard userError == nil else {
+                    print("Couldn't get userScore")
+                    return
+                }
+                
+                let userDetails = userData?.data()
+                self.mUserScore = (userDetails!["score"] as! Int)
+                print(self.mUserScore)
+                self.sendQuestionBtn.isEnabled = true
+                self.sendQuestionBtn.titleLabel?.text = "Send your question"
+                
+            })
+            
+            
             
             if let stringCity = address{
-                self.cityName = stringCity as! String
+                self.cityName = stringCity
             }
             
             self.userLocation = self.customLocationManager.mUserLocation
@@ -69,7 +82,7 @@ class AskForHelpViewController: UIViewController {
         if let question = questionTextView.text, question != "Write Your Question" || question == "" {
             let userID = Auth.auth().currentUser?.uid
             let userReference = self.database!.collection("Users").document(userID!)
-            
+
             // Saving Objects is not supported yet, thus we will save as dictionary :)
             let dataToSave = [
                 "question": question,
@@ -78,7 +91,8 @@ class AskForHelpViewController: UIViewController {
                 "cityCoordinates": GeoPoint(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude),
                 "postedAt": Date(),
                 "userReference": userReference,
-                "suggestions": 0
+                "suggestions": 0,
+                "score": self.mUserScore
                 ] as [String : Any]
             
             ref = database!.collection("Questions").addDocument(data: dataToSave) {
@@ -90,10 +104,10 @@ class AskForHelpViewController: UIViewController {
                     return
                 }
 
-                FireBaseClient().incrementBy(collection: "Users", document: "\(userID!)", fieldToInc: "questions", database: self.database!)
+                FireBaseClient().incrementBy(collection: "Users", document: "\(userID!)", fieldToInc: "questions", database: self.database!, scoreObject: false)
                 self.questionID = self.ref?.documentID
                 self.appDelegate.sharedData.set(self.questionID, forKey: "postedQuestionID")
-                self.tabBarController?.selectedIndex = 2
+                self.tabBarController?.selectedIndex = 0
             }
         }else{
             showAlert(title: "Error", message: "Enter Your question ")

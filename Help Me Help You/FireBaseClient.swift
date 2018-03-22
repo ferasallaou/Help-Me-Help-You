@@ -14,7 +14,7 @@ import Firebase
 class FireBaseClient {
     
     
-    func incrementBy(collection: String, document: String?, fieldToInc:String, database: Firestore)
+    func incrementBy(collection: String, document: String?, fieldToInc:String, database: Firestore, scoreObject: Bool?)
     {
      
         let docRef = database.collection("\(collection)").document("\(document!)")
@@ -27,6 +27,22 @@ class FireBaseClient {
                 
                 objectToIncrement += 1
                 refInfo["\(fieldToInc)"] = objectToIncrement
+                
+                if let _ = scoreObject {
+                    if scoreObject! {
+                        var currentScore = refInfo["score"] as! Int
+                        currentScore += 10
+                        let lastAnswer = refInfo["lastAnswer"] as! Date
+                        let currentDate = Date()
+                        let comparision = currentDate.compare(lastAnswer).rawValue
+                        let comparisionInWeeks = comparision/7
+                        if comparisionInWeeks != 0 {
+                            currentScore = currentScore/comparisionInWeeks
+                        }
+                        refInfo["score"] = currentScore
+                        refInfo["lastAnswer"] = Date()
+                    }
+                }
                 
                 transaction.setData(refInfo, forDocument: docRef)
             }catch{
