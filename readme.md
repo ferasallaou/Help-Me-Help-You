@@ -16,3 +16,8 @@ A user can  view the question and add suggestions, thus he will get 10 points fo
 ### The Different Views
 The second tab is for asking the question.
 The third just list the user’s questions and the answers on them.
+
+
+# Building The App
+
+A Pod Profile file is provided, thus make sure to install them before building the app for the first time.
