@@ -7,11 +7,9 @@
 //
 
 import UIKit
-import Alamofire
 import Firebase
 import FirebaseAuth
-
-
+import Reachability
 
 class MainViewController: UIViewController {
     
@@ -24,21 +22,16 @@ class MainViewController: UIViewController {
     var questions = [Question]()
     let customLocationManager = LocationManager()
     var database: Firestore!
-    
+    let reachbility = Reachability()!
   
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         customLocationManager.getUserLocation() 
          database = Firestore.firestore()
 
         // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
     }
 
 
@@ -46,10 +39,24 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         getUserInfo()
         getQuestions()
+        reachbility.whenUnreachable = {
+            _ in
+            let about = UIAlertController(title: "No Internet", message: "Failed to connect.", preferredStyle: UIAlertControllerStyle.alert)
+            let gotItBtn = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
+            about.addAction(gotItBtn)
+            self.present(about, animated: true, completion: nil)
+        }
+        
+        do {
+            try reachbility.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
     }
 
     
     func getQuestions() {
+        questions = []
         self.noQuestionsLable.isHidden = true
         self.mainTable.isHidden = true
         self.activityIndicator.startAnimating()

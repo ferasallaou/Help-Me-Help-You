@@ -48,38 +48,27 @@ class SuggestionViewController: UIViewController {
             "limit": "20"
         ]
     
-        Alamofire.request(fourSquare().getVenus, method: HTTPMethod.get, parameters: parameters, encoding: URLEncoding.default, headers: nil)
-            .responseJSON {
-            response in
+        NetworkClient().getVenus(parameters: parameters){
+            (venues, error) in
             
-            if let results = response.result.value as? [String: Any]{
-                let statusCode = results["meta"] as? [String: Any]
-                let code = (statusCode!["code"])! as? Int
-                if code == 200 {
-                    if let responseObj = results["response"] as? [String: Any], responseObj["totalResults"] as! Int > 0 {
-                        let groups = responseObj["groups"] as? [Any]
-                        let itemsArr = groups![0] as? [String: Any]
-                        let items = itemsArr!["items"] as? [[String:Any]]
-                        for singleItem in items! {
-                            let singleVenue = singleItem["venue"] as? [String: Any]
-                            let venue = Venues(id: singleVenue!["id"] as! String , name: singleVenue!["name"] as! String, lat: 1.00, lng: 1.00, url: "", category:"")
-                            self.venuesArr.append(venue)
-                        }
-                    }
-                    
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
-                    self.suggestionsTable.isHidden = false
-                    self.suggestionsTable.reloadData()
-                    
-                }else{
-                    print("There was an Error connecting to the API")
-                    
-                }
+            guard error == nil else {
+                let alert = UIAlertController(title: "Error", message: error!, preferredStyle: UIAlertControllerStyle.alert)
+                let okBtn = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
+                alert.addAction(okBtn)
+                self.present(alert, animated: true, completion: nil)
+                return
             }
             
+            self.venuesArr = venues!
+            
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
+            self.suggestionsTable.isHidden = false
+            self.suggestionsTable.reloadData()
+            
         }
-
+        
+    
         
     }
     

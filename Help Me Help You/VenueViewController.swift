@@ -12,10 +12,11 @@ import MapKit
 import Alamofire
 
 class VenueViewController: UIViewController {
-
+    
     @IBOutlet weak var venueMap: MKMapView! 
     @IBOutlet weak var categoryLable: UILabel!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var visitPage: UIButton!
     var lableText: String?
     var question: Question?
@@ -25,22 +26,23 @@ class VenueViewController: UIViewController {
     var venueToSave: [String: Any]?
     
     override func viewDidLoad() {
-        visitPage.isEnabled = false
         super.viewDidLoad()
-        if (mVenue!.lat == 1.00)
-        {
+        
+        visitPage.isEnabled = false
+        activityIndicator.isHidden = true
+        if (mVenue!.lat == 1.00) {
             getVenueDetails()
-        }else{
+        } else {
             visitPage.isEnabled = true
             self.categoryLable.text =  "Category: \((self.mVenue!.category))"
             self.setMapAnnotation(lat: self.mVenue!.lat, lon: self.mVenue!.lng)
         }
         
-         confirm = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.addAnswer))
+        confirm = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.addAnswer))
         self.navigationItem.rightBarButtonItem = confirm
         confirm.isEnabled = false
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.topItem?.title = mVenue!.name
@@ -49,7 +51,7 @@ class VenueViewController: UIViewController {
     
     @objc func addAnswer(){
         confirm.isEnabled = false
-
+        
         let venueID = mVenue?.id
         let questionRef = database.collection("Questions").document("\((question?.docID)!)")
         
@@ -81,7 +83,7 @@ class VenueViewController: UIViewController {
             }
             
         }
-
+        
         
     }
     
@@ -97,55 +99,37 @@ class VenueViewController: UIViewController {
             "client_id": fourSquare().clientID,
             "client_secret": fourSquare().clientSecret,
             "v": "20190101",
-        ]
+            ]
         let questionRef = database.collection("Questions").document("\((question?.docID)!)")
         let userRef = database.collection("Users").document("\((Auth.auth().currentUser?.uid)!)")
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
         
-        Alamofire.request(URL, method: HTTPMethod.get, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+        NetworkClient().getVenueDetails(url: URL, parameters: parameters, questionRef: questionRef, userRef: userRef, mVenue: mVenue!) { 
+            (venue, error) in
             
-            if let parseResponse = response.result.value as? [String: Any]{
-                let statusCode = parseResponse["meta"] as? [String: Any]
-                let code = (statusCode!["code"])! as? Int
-                
-                if code! == 200{
-                    let responseObj = (parseResponse["response"]) as? [String: Any]
-                    if let venueObject = responseObj!["venue"] as? [String: Any] {
-                    let venueURL = (venueObject["canonicalUrl"])!
-                    let locationObj = venueObject["location"] as? [String: Any]
-                    let categoryObj = venueObject["categories"] as! [[String: Any]]
-                    let cat = categoryObj[0]
-                        //print("Final is \(venueURL) + \(locationObj!["lat"]) + \(categoryObj[0])")
-                        self.venueToSave = [
-                            "venueID": self.mVenue!.id,
-                            "venueName": self.mVenue!.name,
-                            "lat": (locationObj!["lat"])!,
-                            "lng": (locationObj!["lng"])!,
-                            "url": venueURL,
-                            "category": (cat["pluralName"])!,
-                            "questionRef": questionRef,
-                            "userRef": userRef
-                            ]
-                        
-                        self.categoryLable.text =  "Category: \((self.venueToSave!["category"])!)"
-                        self.setMapAnnotation(lat: self.venueToSave!["lat"] as! Double, lon: self.venueToSave!["lng"] as! Double)
-                        self.visitPage.isEnabled = true
-                        self.mVenue = Venues(id: self.venueToSave!["venueID"] as! String,
-                                        name: self.venueToSave!["venueName"] as! String,
-                                        lat: self.venueToSave!["lat"] as! Double,
-                                        lng: self.venueToSave!["lng"] as! Double,
-                                        url: self.venueToSave!["url"] as! String,
-                                        category: self.venueToSave!["category"] as! String)
-                        self.confirm.isEnabled = true
-                        
-                    }
-                }else{
-                let alert = UIAlertController(title: "Error", message: "Couldn't Get Venue details", preferredStyle: UIAlertControllerStyle.alert)
-                    self.present(alert, animated: true, completion: nil)
-                }
+            self.activityIndicator.isHidden = true
+            self.activityIndicator.stopAnimating()
+            
+            guard error == nil else {
+                let alert = UIAlertController(title: "Error", message: error!, preferredStyle: UIAlertControllerStyle.alert)
+                let okBtn = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
+                alert.addAction(okBtn)
+                self.present(alert, animated: true, completion: nil)
+                return
             }
+            
+            
+            self.venueToSave = venue
+            
+            self.categoryLable.text =  "Category: \((self.venueToSave!["category"])!)"
+            self.setMapAnnotation(lat: self.venueToSave!["lat"] as! Double, lon: self.venueToSave!["lng"] as! Double)
+            self.visitPage.isEnabled = true
+            self.confirm.isEnabled = true
+            
         }
         
         
     }
-
+    
 }

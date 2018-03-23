@@ -29,6 +29,7 @@
 		E08A358420536D2F00B47414 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A358320536D2F00B47414 /* LoginViewController.swift */; };
 		E08A35862053709100B47414 /* LoginViewController+LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */; };
 		E0AFDE72205667180018C2DC /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AFDE71205667180018C2DC /* SuggestionViewController.swift */; };
+		E0B633D2206516870018AD9E /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B633D1206516870018AD9E /* NetworkClient.swift */; };
 		E0C9BCF72057C31100B3869F /* GetUserNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C9BCF62057C31100B3869F /* GetUserNameViewController.swift */; };
 		E0F00AE12056482F00317C01 /* AskForHelpVC+LocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */; };
 		E0F00AE3205654F600317C01 /* AskForHelpVC+TextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */; };
@@ -61,6 +62,7 @@
 		E08A358320536D2F00B47414 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+LoginExtension.swift"; sourceTree = "<group>"; };
 		E0AFDE71205667180018C2DC /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
+		E0B633D1206516870018AD9E /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		E0C9BCF62057C31100B3869F /* GetUserNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserNameViewController.swift; sourceTree = "<group>"; };
 		E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForHelpVC+LocationExtension.swift"; sourceTree = "<group>"; };
 		E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForHelpVC+TextViewExtension.swift"; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				E077A90D2060B73D004B5853 /* SuggestionVC+Extension.swift */,
 				E01FAB262060DFFB0021E990 /* VenueViewController.swift */,
 				E07C340020624DFD00A54BBD /* VenueViewController+Extensions.swift */,
+				E0B633D1206516870018AD9E /* NetworkClient.swift */,
 			);
 			path = "Help Me Help You";
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
@@ -279,6 +283,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
@@ -309,6 +314,7 @@
 				E07C33FF20623BBD00A54BBD /* AnswersViewController+Extension.swift in Sources */,
 				E07BE00920627D8E00AA48DD /* MainViewController+Extension.swift in Sources */,
 				E078979B2058C26500BB114C /* QuestionsViewController.swift in Sources */,
+				E0B633D2206516870018AD9E /* NetworkClient.swift in Sources */,
 				E03E2737204FC89D00FCD334 /* MainViewController.swift in Sources */,
 				E077A90C2060A49E004B5853 /* AnswersViewController.swift in Sources */,
 				E0AFDE72205667180018C2DC /* SuggestionViewController.swift in Sources */,

@@ -8,12 +8,14 @@
 
 import UIKit
 import Firebase
+import Reachability
 
 class AnswersViewController: UIViewController {
 
     var question: Question?
     var suggestions = [Venues]()
     let database = Firestore.firestore()
+    let reachbility = Reachability()!
     
     @IBOutlet weak var questionLable: UITextView!
     @IBOutlet weak var suggestionsTable: UITableView!
@@ -26,7 +28,19 @@ class AnswersViewController: UIViewController {
         questionLable.text = question!.question
         let myBtn = UIBarButtonItem(title: "Add Suggestion", style: UIBarButtonItemStyle.done, target: self, action: #selector(showSuggestions))
         self.navigationItem.rightBarButtonItem = myBtn
+        reachbility.whenUnreachable = {
+            _ in
+            let about = UIAlertController(title: "No Internet", message: "Failed to connect.", preferredStyle: UIAlertControllerStyle.alert)
+            let gotItBtn = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
+            about.addAction(gotItBtn)
+            self.present(about, animated: true, completion: nil)
+        }
         
+        do {
+            try reachbility.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
         
         // Do any additional setup after loading the view.
     }
