@@ -39,7 +39,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                 locationManager.startUpdatingLocation()
                 mUserLocation = locationManager.location
             }
-
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
