@@ -8,9 +8,9 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
-
-extension QuestionsViewController: UITableViewDelegate, UITableViewDataSource {
+extension QuestionsViewController: UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate  {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return question.count
     }
@@ -27,6 +27,9 @@ extension QuestionsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell!
     }
     
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("OK :) ")
+    }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         let item = question[indexPath.row]

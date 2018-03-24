@@ -18,21 +18,25 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     var currentLocation: CLLocation!
     let googleMapsApi = googleMaps()
     var isAuth = false
-    let authStatus = CLLocationManager.authorizationStatus()
+    var authStatus = CLLocationManager.authorizationStatus()
     let inUse = CLAuthorizationStatus.authorizedWhenInUse
     let always = CLAuthorizationStatus.authorizedAlways
     
+    
+    func presentAuth() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
     func getUserLocation(){
-            locationManager.delegate = self
-            locationManager.requestWhenInUseAuthorization()
         
             let isLocationAuth = CLLocationManager.authorizationStatus()
             if isLocationAuth != .authorizedAlways && isLocationAuth != .authorizedWhenInUse {
-                print( "This app needs to use Location Service, Please grant the permissions.")
+                debugPrint("This app needs to use Location Service, Please grant the permissions.")
             }else if !CLLocationManager.locationServicesEnabled(){
-                print("Location Service is Disabled.")
+                debugPrint("Location Service is Disabled.")
             }else{
-                isAuth = true
+                authStatus = CLLocationManager.authorizationStatus()
                 locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
                 locationManager.distanceFilter = 1000.0  // In meters.
                 locationManager.delegate = self
@@ -42,10 +46,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("Did change")
         switch status{
         case .authorizedAlways, .authorizedWhenInUse:
-            print("author")
             break
         case .denied, .notDetermined, .restricted:
             locationManager.requestWhenInUseAuthorization()
@@ -53,7 +55,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("HIT ME")
         if let tryUserLocation = locations.last {
             mUserLocation = CLLocation(latitude: tryUserLocation.coordinate.latitude, longitude: tryUserLocation.coordinate.longitude)
         }else{
@@ -69,24 +70,28 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func getAdress(completion: @escaping (_ address: String?, _ error: Error?) -> ()) {
 
         getUserLocation()
+        authStatus = CLLocationManager.authorizationStatus()
+        
         if self.authStatus == inUse || self.authStatus == always {
             
             self.currentLocation = mUserLocation
             
-            //let geoCoder = CLGeocoder()
+            
 
             let latlng = "\(self.currentLocation.coordinate.latitude),\(self.currentLocation.coordinate.longitude)"
             let url = "\(googleMaps().APIUrl)+\(latlng)&key=\(googleMaps().APIKey)"
+            
+            
             Alamofire.request(url).responseJSON() {
                 response in
             
+
                 if let result = response.result.value as? [String: Any], let addressComp = result["results"] as? NSArray {
                     if let addressObject = addressComp.value(forKey: "address_components") as? NSArray, let cityArray = addressObject[0] as? NSArray{
-                        if let getCity = cityArray[3] as? [String:Any], let cityName = getCity["short_name"] {
-                            completion(cityName as! String, nil)
+                        if let getCity = cityArray[3] as? [String:Any], let cityName = getCity["short_name"] as? String{
+                            completion(cityName , nil)
                         }
                     }
-
                 }
             }   
         }
@@ -101,15 +106,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    
-    func showAlert(title: String,message: String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okBtn = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        
-        alert.addAction(okBtn)
 
-        //present(alert, animated: true, completion: nil)
-        
-    }
     
 }

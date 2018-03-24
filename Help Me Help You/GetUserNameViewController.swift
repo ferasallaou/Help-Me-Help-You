@@ -28,10 +28,7 @@ class GetUserNameViewController: UIViewController {
         proceedBtn.isEnabled = false
         
         if usernameTextField.text?.isEmpty ?? true {
-         let alert = UIAlertController(title: "Missing Info", message: "Please fill in your name", preferredStyle: UIAlertControllerStyle.alert)
-            let okBtn = UIAlertAction(title: "Ok", style: .default, handler: nil)
-            alert.addAction(okBtn)
-            self.present(alert, animated: true, completion: nil)
+            Misc().showAlert(title: "Missing Info", message: "Please fill in your name", view: self, btnTitle: "Ok")
             proceedBtn.isEnabled = true
         }else{
             let dataToSave  = [

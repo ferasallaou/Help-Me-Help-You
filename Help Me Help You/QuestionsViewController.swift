@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import Reachability
 
 class QuestionsViewController: UIViewController{
 
@@ -30,7 +29,7 @@ class QuestionsViewController: UIViewController{
     var questionID : String?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var userHandler: AuthStateDidChangeListenerHandle?
-    let reachbility = Reachability()!
+    
     
     
     override func viewDidLoad() {
@@ -39,19 +38,7 @@ class QuestionsViewController: UIViewController{
         database = Firestore.firestore()
         
         questionID = nil
-        reachbility.whenUnreachable = {
-            _ in
-            let about = UIAlertController(title: "No Internet", message: "Failed to connect.", preferredStyle: UIAlertControllerStyle.alert)
-            let gotItBtn = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
-            about.addAction(gotItBtn)
-            self.present(about, animated: true, completion: nil)
-        }
-        
-        do {
-            try reachbility.startNotifier()
-        } catch {
-            print("Unable to start notifier")
-        }
+        Misc().checkConnection(view: self)
         // Do any additional setup after loading the view.
     }
 
@@ -109,7 +96,7 @@ class QuestionsViewController: UIViewController{
             
             
             guard error == nil else {
-                print("Couldn't get new Address :( ")
+                Misc().showAlert(title: "Oops", message: "Couldn't get new Address :( ", view: self, btnTitle: "Ok")
                 return
             }
             
@@ -122,7 +109,7 @@ class QuestionsViewController: UIViewController{
             let query = self.database!.collection("Questions").whereField("cityName", isEqualTo: self.userCity!).order(by: "score", descending: true)
             query.getDocuments { (documents, error) in
                 guard error == nil else {
-                    print("Error Getting Data \(error!.localizedDescription)")
+                    Misc().showAlert(title: "Oops", message: "Error Getting Data \(error!.localizedDescription) ", view: self, btnTitle: "Ok")
                     return
                 }
                 

@@ -52,10 +52,7 @@ class SuggestionViewController: UIViewController {
             (venues, error) in
             
             guard error == nil else {
-                let alert = UIAlertController(title: "Error", message: error!, preferredStyle: UIAlertControllerStyle.alert)
-                let okBtn = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
-                alert.addAction(okBtn)
-                self.present(alert, animated: true, completion: nil)
+                Misc().showAlert(title: "Error", message: error!, view: self, btnTitle: "Ok")
                 return
             }
             

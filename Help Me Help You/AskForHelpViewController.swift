@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 import Firebase
-import Reachability
+
 
 class AskForHelpViewController: UIViewController {
 
@@ -25,7 +25,7 @@ class AskForHelpViewController: UIViewController {
     var questionID: String?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var mUserScore = 0
-    let reachbility = Reachability()!
+    
     
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -35,25 +35,14 @@ class AskForHelpViewController: UIViewController {
         questionTextView.layer.borderColor = UIColor.gray.cgColor
         questionTextView.layer.borderWidth = 1.0
         database = Firestore.firestore()
-        reachbility.whenUnreachable = {
-            _ in
-            let about = UIAlertController(title: "No Internet", message: "Failed to connect.", preferredStyle: UIAlertControllerStyle.alert)
-            let gotItBtn = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
-            about.addAction(gotItBtn)
-            self.present(about, animated: true, completion: nil)
-        }
         
-        do {
-            try reachbility.startNotifier()
-        } catch {
-            print("Unable to start notifier")
-        }
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        Misc().checkConnection(view: self)
         self.sendQuestionBtn.isEnabled = false
         self.sendQuestionBtn.titleLabel?.text = "Getting City Name...."
         self.activityIndicator.isHidden = true
@@ -61,20 +50,19 @@ class AskForHelpViewController: UIViewController {
             (address, error) in
             
             guard error == nil else {
-                print("An Error getting Cicty")
+                Misc().showAlert(title: "Oops", message: "Coudln't Give City", view: self, btnTitle: "Ok")
                 return
             }
             
             let userID = Auth.auth().currentUser?.uid
             self.database!.collection("Users").document(userID!).getDocument(completion: { (userData, userError) in
                 guard userError == nil else {
-                    print("Couldn't get userScore")
+                    Misc().showAlert(title: "Oops", message: "Error Getting User's Score", view: self, btnTitle: "Ok")
                     return
                 }
                 
                 let userDetails = userData?.data()
                 self.mUserScore = (userDetails!["score"] as! Int)
-                print(self.mUserScore)
                 self.sendQuestionBtn.isEnabled = true
                 self.sendQuestionBtn.titleLabel?.text = "Send your question"
                 
@@ -117,7 +105,7 @@ class AskForHelpViewController: UIViewController {
                 err in
 
                 guard err == nil else {
-                    self.showAlert(title: "Error", message: "Couldn't post your question, Please try again later.")
+                    Misc().showAlert(title: "Error", message: "Couldn't post your question, Please try again later.", view: self, btnTitle: "Ok")
                     self.sendQuestionBtn.isEnabled = true
                     return
                 }
@@ -128,7 +116,7 @@ class AskForHelpViewController: UIViewController {
                 self.tabBarController?.selectedIndex = 0
             }
         }else{
-            showAlert(title: "Error", message: "Enter Your question ")
+            Misc().showAlert(title: "Error", message: "Enter Your Question", view: self, btnTitle: "Ok")
             self.sendQuestionBtn.isEnabled = true
         }
     }

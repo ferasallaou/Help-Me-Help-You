@@ -18,6 +18,7 @@
 		E03E273A204FC89D00FCD334 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03E2738204FC89D00FCD334 /* Main.storyboard */; };
 		E03E273C204FC89D00FCD334 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E03E273B204FC89D00FCD334 /* Assets.xcassets */; };
 		E03E273F204FC89D00FCD334 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E03E273D204FC89D00FCD334 /* LaunchScreen.storyboard */; };
+		E048F9B42065DFD800D8EB76 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E048F9B32065DFD800D8EB76 /* Misc.swift */; };
 		E077A90C2060A49E004B5853 /* AnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E077A90B2060A49E004B5853 /* AnswersViewController.swift */; };
 		E077A90E2060B73D004B5853 /* SuggestionVC+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E077A90D2060B73D004B5853 /* SuggestionVC+Extension.swift */; };
 		E078979B2058C26500BB114C /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078979A2058C26500BB114C /* QuestionsViewController.swift */; };
@@ -31,7 +32,6 @@
 		E0AFDE72205667180018C2DC /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AFDE71205667180018C2DC /* SuggestionViewController.swift */; };
 		E0B633D2206516870018AD9E /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B633D1206516870018AD9E /* NetworkClient.swift */; };
 		E0C9BCF72057C31100B3869F /* GetUserNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C9BCF62057C31100B3869F /* GetUserNameViewController.swift */; };
-		E0F00AE12056482F00317C01 /* AskForHelpVC+LocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */; };
 		E0F00AE3205654F600317C01 /* AskForHelpVC+TextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +51,7 @@
 		E03E273B204FC89D00FCD334 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E03E273E204FC89D00FCD334 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E03E2740204FC89D00FCD334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E048F9B32065DFD800D8EB76 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		E077A90B2060A49E004B5853 /* AnswersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersViewController.swift; sourceTree = "<group>"; };
 		E077A90D2060B73D004B5853 /* SuggestionVC+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionVC+Extension.swift"; sourceTree = "<group>"; };
 		E078979A2058C26500BB114C /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
@@ -64,7 +65,6 @@
 		E0AFDE71205667180018C2DC /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		E0B633D1206516870018AD9E /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		E0C9BCF62057C31100B3869F /* GetUserNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserNameViewController.swift; sourceTree = "<group>"; };
-		E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForHelpVC+LocationExtension.swift"; sourceTree = "<group>"; };
 		E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForHelpVC+TextViewExtension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,7 +131,6 @@
 				E08A35852053709100B47414 /* LoginViewController+LoginExtension.swift */,
 				E035A1702056415200C1F68C /* AskForHelpViewController.swift */,
 				E0F00AE2205654F600317C01 /* AskForHelpVC+TextViewExtension.swift */,
-				E0F00AE02056482F00317C01 /* AskForHelpVC+LocationExtension.swift */,
 				E0C9BCF62057C31100B3869F /* GetUserNameViewController.swift */,
 				E03A42022057E116001B9C47 /* FireBaseClient.swift */,
 				E078979A2058C26500BB114C /* QuestionsViewController.swift */,
@@ -144,6 +143,7 @@
 				E01FAB262060DFFB0021E990 /* VenueViewController.swift */,
 				E07C340020624DFD00A54BBD /* VenueViewController+Extensions.swift */,
 				E0B633D1206516870018AD9E /* NetworkClient.swift */,
+				E048F9B32065DFD800D8EB76 /* Misc.swift */,
 			);
 			path = "Help Me Help You";
 			sourceTree = "<group>";
@@ -303,11 +303,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0F00AE12056482F00317C01 /* AskForHelpVC+LocationExtension.swift in Sources */,
 				E08A358420536D2F00B47414 /* LoginViewController.swift in Sources */,
 				E07897A12058CAF300BB114C /* LocationManager.swift in Sources */,
 				E035A1712056415200C1F68C /* AskForHelpViewController.swift in Sources */,
 				E07C340120624DFD00A54BBD /* VenueViewController+Extensions.swift in Sources */,
+				E048F9B42065DFD800D8EB76 /* Misc.swift in Sources */,
 				E078979D2058C30700BB114C /* QuestionsViewController+TableExtension.swift in Sources */,
 				E03A42032057E116001B9C47 /* FireBaseClient.swift in Sources */,
 				E01FAB272060DFFB0021E990 /* VenueViewController.swift in Sources */,

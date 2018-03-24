@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import FirebaseAuth
-import Reachability
 
 class MainViewController: UIViewController {
     
@@ -22,12 +21,11 @@ class MainViewController: UIViewController {
     var questions = [Question]()
     let customLocationManager = LocationManager()
     var database: Firestore!
-    let reachbility = Reachability()!
   
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        definesPresentationContext = true
         customLocationManager.getUserLocation() 
          database = Firestore.firestore()
 
@@ -39,19 +37,7 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         getUserInfo()
         getQuestions()
-        reachbility.whenUnreachable = {
-            _ in
-            let about = UIAlertController(title: "No Internet", message: "Failed to connect.", preferredStyle: UIAlertControllerStyle.alert)
-            let gotItBtn = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
-            about.addAction(gotItBtn)
-            self.present(about, animated: true, completion: nil)
-        }
-        
-        do {
-            try reachbility.startNotifier()
-        } catch {
-            print("Unable to start notifier")
-        }
+        Misc().checkConnection(view: self)
     }
 
     
@@ -117,20 +103,16 @@ class MainViewController: UIViewController {
     
     @IBAction func aboutBtn(_ sender: Any) {
         let appDescription = "Help Me Help You is an App designed to help using real locations with one idea, the more you help people, the more your chance of getting help. And in case you are wondering, the App just covers your city in an attempt to give authentic answers."
-        let about = UIAlertController(title: "About", message: appDescription, preferredStyle: UIAlertControllerStyle.alert)
-        let gotItBtn = UIAlertAction(title: "Got It", style: UIAlertActionStyle.default, handler: nil)
-        about.addAction(gotItBtn)
-        self.present(about, animated: true, completion: nil)
+        Misc().showAlert(title: "About", message: appDescription, view: self, btnTitle: "Got It")
     }
     
     @IBAction func loginBtn(_ sender: Any) {
         if Auth.auth().currentUser != nil {
             do {
                 try Auth.auth().signOut()
-                let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC")
-                self.present(loginVC!, animated: true, completion: nil)
-            }catch let error as NSError{
-                print("Logout error \(error.localizedDescription)")
+                self.tabBarController?.selectedIndex = 0
+            }catch{
+                Misc().showAlert(title: "Oops", message: "Error Logging Out", view: self, btnTitle: "Ok")
             }
         }
     }

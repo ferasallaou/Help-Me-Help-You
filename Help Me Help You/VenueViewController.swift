@@ -29,7 +29,8 @@ class VenueViewController: UIViewController {
         super.viewDidLoad()
         
         visitPage.isEnabled = false
-        activityIndicator.isHidden = true
+        activityIndicator.hidesWhenStopped = true
+        
         if (mVenue!.lat == 1.00) {
             getVenueDetails()
         } else {
@@ -59,7 +60,7 @@ class VenueViewController: UIViewController {
             (isThere, gotError) in
             
             guard gotError == nil else {
-                print("There was an Error checking....")
+                Misc().showAlert(title: "Error", message: "There was An Error Checking the Answers", view: self, btnTitle: "Ok")
                 return
             }
             
@@ -68,8 +69,7 @@ class VenueViewController: UIViewController {
                     err in
                     
                     guard err == nil else {
-                        let alert = UIAlertController(title: "Error", message: "Error while saving the answer. Try again plz", preferredStyle: UIAlertControllerStyle.alert)
-                        self.present(alert, animated: true, completion: nil)
+                        Misc().showAlert(title: "Error", message: "Error while saving the answer. Try again plz", view: self, btnTitle: "Ok")
                         return
                     }
                     
@@ -102,20 +102,17 @@ class VenueViewController: UIViewController {
             ]
         let questionRef = database.collection("Questions").document("\((question?.docID)!)")
         let userRef = database.collection("Users").document("\((Auth.auth().currentUser?.uid)!)")
-        self.activityIndicator.isHidden = false
+        
         self.activityIndicator.startAnimating()
         
         NetworkClient().getVenueDetails(url: URL, parameters: parameters, questionRef: questionRef, userRef: userRef, mVenue: mVenue!) { 
             (venue, error) in
             
-            self.activityIndicator.isHidden = true
+        
             self.activityIndicator.stopAnimating()
             
             guard error == nil else {
-                let alert = UIAlertController(title: "Error", message: error!, preferredStyle: UIAlertControllerStyle.alert)
-                let okBtn = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
-                alert.addAction(okBtn)
-                self.present(alert, animated: true, completion: nil)
+                Misc().showAlert(title: "Error", message: error!, view: self, btnTitle: "Ok")
                 return
             }
             
