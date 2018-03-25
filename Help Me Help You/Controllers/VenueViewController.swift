@@ -15,9 +15,9 @@ class VenueViewController: UIViewController {
     
     @IBOutlet weak var venueMap: MKMapView! 
     @IBOutlet weak var categoryLable: UILabel!
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var visitPage: UIButton!
+    
     var lableText: String?
     var question: Question?
     var mVenue: Venues?
@@ -46,6 +46,7 @@ class VenueViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NetworkUtility().checkConnection(view: self, activity: activityIndicator)
         self.navigationController?.navigationBar.topItem?.title = mVenue!.name
         
     }
@@ -60,7 +61,7 @@ class VenueViewController: UIViewController {
             (isThere, gotError) in
             
             guard gotError == nil else {
-                Misc().showAlert(title: "Error", message: "There was An Error Checking the Answers", view: self, btnTitle: "Ok")
+                NetworkUtility().showAlert(title: "Error", message: "There was An Error Checking the Answers", view: self, btnTitle: "Ok")
                 return
             }
             
@@ -69,7 +70,7 @@ class VenueViewController: UIViewController {
                     err in
                     
                     guard err == nil else {
-                        Misc().showAlert(title: "Error", message: "Error while saving the answer. Try again plz", view: self, btnTitle: "Ok")
+                        NetworkUtility().showAlert(title: "Error", message: "Error while saving the answer. Try again plz", view: self, btnTitle: "Ok")
                         return
                     }
                     
@@ -112,7 +113,7 @@ class VenueViewController: UIViewController {
             self.activityIndicator.stopAnimating()
             
             guard error == nil else {
-                Misc().showAlert(title: "Error", message: error!, view: self, btnTitle: "Ok")
+                NetworkUtility().showAlert(title: "Error", message: error!, view: self, btnTitle: "Ok")
                 return
             }
             

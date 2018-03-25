@@ -1,5 +1,5 @@
 //
-//  Misc.swift
+//  NetworkUtility.swift
 //  Help Me Help You
 //
 //  Created by Feras Allaou on 3/24/18.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Reachability
 
-class Misc{
+class NetworkUtility{
 
     let reachability = Reachability()!
     
@@ -24,10 +24,13 @@ class Misc{
         }
     }
     
-    func checkConnection(view: UIViewController) {
+    func checkConnection(view: UIViewController, activity: UIActivityIndicatorView?) {
         reachability.whenUnreachable = {
             _ in
             self.showAlert(title: "No Internet", message: "Failed to connect.", view: view, btnTitle: "Ok")
+            if let _ = activity {
+                activity?.stopAnimating()
+            }
         }
         
         do {

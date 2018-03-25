@@ -27,6 +27,7 @@ class SuggestionViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NetworkUtility().checkConnection(view: self, activity: activityIndicator)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
@@ -52,7 +53,7 @@ class SuggestionViewController: UIViewController {
             (venues, error) in
             
             guard error == nil else {
-                Misc().showAlert(title: "Error", message: error!, view: self, btnTitle: "Ok")
+                NetworkUtility().showAlert(title: "Error", message: error!, view: self, btnTitle: "Ok")
                 return
             }
             

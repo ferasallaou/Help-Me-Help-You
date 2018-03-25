@@ -37,7 +37,7 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         getUserInfo()
         getQuestions()
-        Misc().checkConnection(view: self)
+        NetworkUtility().checkConnection(view: self, activity: activityIndicator)
     }
 
     
@@ -103,7 +103,7 @@ class MainViewController: UIViewController {
     
     @IBAction func aboutBtn(_ sender: Any) {
         let appDescription = "Help Me Help You is an App designed to help using real locations with one idea, the more you help people, the more your chance of getting help. And in case you are wondering, the App just covers your city in an attempt to give authentic answers."
-        Misc().showAlert(title: "About", message: appDescription, view: self, btnTitle: "Got It")
+        NetworkUtility().showAlert(title: "About", message: appDescription, view: self, btnTitle: "Got It")
     }
     
     @IBAction func loginBtn(_ sender: Any) {
@@ -112,7 +112,7 @@ class MainViewController: UIViewController {
                 try Auth.auth().signOut()
                 self.tabBarController?.selectedIndex = 0
             }catch{
-                Misc().showAlert(title: "Oops", message: "Error Logging Out", view: self, btnTitle: "Ok")
+                NetworkUtility().showAlert(title: "Oops", message: "Error Logging Out", view: self, btnTitle: "Ok")
             }
         }
     }

@@ -16,6 +16,7 @@ class AskForHelpViewController: UIViewController {
     
     @IBOutlet weak var sendQuestionBtn: UIButton!
     @IBOutlet weak var questionTextView: UITextView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let customLocationManager = LocationManager()
     var database: Firestore? = nil
@@ -28,7 +29,7 @@ class AskForHelpViewController: UIViewController {
     
     
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         questionTextView.delegate = self
@@ -42,22 +43,24 @@ class AskForHelpViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        Misc().checkConnection(view: self)
+        NetworkUtility().checkConnection(view: self, activity: activityIndicator)
+        
         self.sendQuestionBtn.isEnabled = false
         self.sendQuestionBtn.titleLabel?.text = "Getting City Name...."
-        self.activityIndicator.isHidden = true
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.stopAnimating()
         customLocationManager.getAdress() {
             (address, error) in
             
             guard error == nil else {
-                Misc().showAlert(title: "Oops", message: "Coudln't Give City", view: self, btnTitle: "Ok")
+                NetworkUtility().showAlert(title: "Oops", message: "Coudln't Give City", view: self, btnTitle: "Ok")
                 return
             }
             
             let userID = Auth.auth().currentUser?.uid
             self.database!.collection("Users").document(userID!).getDocument(completion: { (userData, userError) in
                 guard userError == nil else {
-                    Misc().showAlert(title: "Oops", message: "Error Getting User's Score", view: self, btnTitle: "Ok")
+                    NetworkUtility().showAlert(title: "Oops", message: "Error Getting User's Score", view: self, btnTitle: "Ok")
                     return
                 }
                 
@@ -82,9 +85,9 @@ class AskForHelpViewController: UIViewController {
 
 
     @IBAction func sendUrQuestion(_ sender: Any) {
-        self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         self.sendQuestionBtn.isEnabled = false
+        
         if let question = questionTextView.text, question != "Write Your Question" || question == "" {
             let userID = Auth.auth().currentUser?.uid
             let userReference = self.database!.collection("Users").document(userID!)
@@ -105,7 +108,7 @@ class AskForHelpViewController: UIViewController {
                 err in
 
                 guard err == nil else {
-                    Misc().showAlert(title: "Error", message: "Couldn't post your question, Please try again later.", view: self, btnTitle: "Ok")
+                    NetworkUtility().showAlert(title: "Error", message: "Couldn't post your question, Please try again later.", view: self, btnTitle: "Ok")
                     self.sendQuestionBtn.isEnabled = true
                     return
                 }
@@ -116,7 +119,7 @@ class AskForHelpViewController: UIViewController {
                 self.tabBarController?.selectedIndex = 0
             }
         }else{
-            Misc().showAlert(title: "Error", message: "Enter Your Question", view: self, btnTitle: "Ok")
+            NetworkUtility().showAlert(title: "Error", message: "Enter Your Question", view: self, btnTitle: "Ok")
             self.sendQuestionBtn.isEnabled = true
         }
     }

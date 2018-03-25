@@ -27,9 +27,7 @@ extension QuestionsViewController: UITableViewDelegate, UITableViewDataSource, C
         return cell!
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("OK :) ")
-    }
+
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         let item = question[indexPath.row]

@@ -22,11 +22,14 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         customLocation.presentAuth()
-        Misc().checkConnection(view: self)
         // Do any additional setup after loading the view.
     }
 
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NetworkUtility().checkConnection(view: self, activity: nil)
+    }
     
     @IBAction func loginBtn(_ sender: Any) {
         responseLable.text = ""
@@ -35,18 +38,13 @@ class LoginViewController: UIViewController {
     }
     
     func checkLoginField() {
-        if emailTextField.text?.isEmpty ?? true {
+        if emailTextField.text?.isEmpty ?? true ||  passwordTextField.text?.isEmpty ?? true{
             responseLable.text = "Please Fill in Your login Credentials"
             loginSignupBtn.isEnabled = true
             return
         }
         
-        if passwordTextField.text?.isEmpty ?? true{
-            responseLable.text = "Please Fill in Your login Credentials"
-            loginSignupBtn.isEnabled = true
-            return
-        }
-        
+     
 
         self.loginOrSignUp(email: emailTextField.text!, password: passwordTextField.text!) {
             (error, userSatus) in

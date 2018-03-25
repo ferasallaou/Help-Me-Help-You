@@ -38,14 +38,14 @@ class QuestionsViewController: UIViewController{
         database = Firestore.firestore()
         
         questionID = nil
-        Misc().checkConnection(view: self)
+        
         // Do any additional setup after loading the view.
     }
 
 
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
+        NetworkUtility().checkConnection(view: self, activity: activityIndicator)
         userHandler = Auth.auth().addStateDidChangeListener {
             (auth, user) in
             
@@ -96,7 +96,7 @@ class QuestionsViewController: UIViewController{
             
             
             guard error == nil else {
-                Misc().showAlert(title: "Oops", message: "Couldn't get new Address :( ", view: self, btnTitle: "Ok")
+                NetworkUtility().showAlert(title: "Oops", message: "Couldn't get new Address :( ", view: self, btnTitle: "Ok")
                 return
             }
             
@@ -109,7 +109,7 @@ class QuestionsViewController: UIViewController{
             let query = self.database!.collection("Questions").whereField("cityName", isEqualTo: self.userCity!).order(by: "score", descending: true)
             query.getDocuments { (documents, error) in
                 guard error == nil else {
-                    Misc().showAlert(title: "Oops", message: "Error Getting Data \(error!.localizedDescription) ", view: self, btnTitle: "Ok")
+                    NetworkUtility().showAlert(title: "Oops", message: "Error Getting Data \(error!.localizedDescription) ", view: self, btnTitle: "Ok")
                     return
                 }
                 

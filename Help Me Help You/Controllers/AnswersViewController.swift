@@ -28,7 +28,6 @@ class AnswersViewController: UIViewController {
         questionLable.text = question!.question
         let myBtn = UIBarButtonItem(title: "Add Suggestion", style: UIBarButtonItemStyle.done, target: self, action: #selector(showSuggestions))
         self.navigationItem.rightBarButtonItem = myBtn
-        Misc().checkConnection(view: self)
         // Do any additional setup after loading the view.
     }
 
@@ -50,6 +49,7 @@ class AnswersViewController: UIViewController {
  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NetworkUtility().checkConnection(view: self, activity: activityIndicator)
         suggestions = []
         getSuggestions()
     }
@@ -76,7 +76,6 @@ class AnswersViewController: UIViewController {
             self.activityIndicator.isHidden = true
             
             if snapshots!.documents.count < 1 {
-                print("Less than 1")
               self.noSuggestionsLable.isHidden = false
             }else{
                 
